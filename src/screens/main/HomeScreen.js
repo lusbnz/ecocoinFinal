@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -37,7 +37,23 @@ const SliderItem = ({ item }) => (
 );
 
 export default function HomeScreen() {
+  const flatListRef = useRef(null);
   const scrollY = useRef(new Animated.Value(0)).current;
+  const currentIndex = useRef(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (flatListRef.current) {
+        currentIndex.current = (currentIndex.current + 1) % sliderData.length;
+        flatListRef.current.scrollToIndex({
+          index: currentIndex.current,
+          animated: true,
+        });
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -93,6 +109,7 @@ export default function HomeScreen() {
         </View>
 
         <FlatList
+          ref={flatListRef}
           data={sliderData}
           horizontal
           pagingEnabled
@@ -123,6 +140,7 @@ export default function HomeScreen() {
             }}
             style={styles.eventBox}
           />
+          <Text style={styles.eventTitle}>Phân loại rác thải như thế nào?</Text>
           <Image
             source={{
               uri: "https://images.pexels.com/photos/16241634/pexels-photo-16241634/free-photo-of-thien-nhien-th-c-v-t-la-mau-xanh-la.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
