@@ -42,7 +42,6 @@ export default function CreatePasswordScreen({ navigation }) {
           secureTextEntry
         />
 
-        {/* Điều kiện mật khẩu dạng badge */}
         <View style={styles.criteriaContainer}>
           <Text style={[styles.badge, isLengthValid && styles.valid]}>8+ Ký tự</Text>
           <Text style={[styles.badge, hasNumber && styles.valid]}>Chứa số</Text>
