@@ -24,9 +24,19 @@ export default function HomeScreen() {
 
       <View style={styles.eventContainer}>
         <Text style={styles.eventTitle}>Sự kiện đang diễn ra</Text>
-        <View style={styles.eventBox} />
+        <Image
+          source={{
+            uri: "https://images.pexels.com/photos/349600/pexels-photo-349600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          }}
+          style={styles.eventBox}
+        />
         <Text style={styles.eventTitle}>Có thể bạn quan tâm</Text>
-        <View style={styles.eventBox} />
+        <Image
+          source={{
+            uri: "https://images.pexels.com/photos/28954361/pexels-photo-28954361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          }}
+          style={styles.eventBox}
+        />
       </View>
     </View>
   );
