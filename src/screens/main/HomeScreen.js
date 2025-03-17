@@ -127,6 +127,7 @@ export default function HomeScreen() {
             }}
             style={styles.eventBox}
           />
+          <Text style={styles.viewMore}>Xem thêm</Text>
           <Text style={styles.eventTitle}>Có thể bạn quan tâm</Text>
           <Image
             source={{
@@ -140,6 +141,7 @@ export default function HomeScreen() {
             }}
             style={styles.eventBox}
           />
+          <Text style={styles.viewMore}>Xem thêm</Text>
           <Text style={styles.eventTitle}>Phân loại rác thải như thế nào?</Text>
           <Image
             source={{
@@ -147,6 +149,7 @@ export default function HomeScreen() {
             }}
             style={styles.eventBox}
           />
+          <Text style={styles.viewMore}>Xem thêm</Text>
         </View>
       </Animated.ScrollView>
     </View>
@@ -189,6 +192,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginTop: 10,
+    color: "#64A6F0",
+  },
+  viewMore: {
+    fontSize: 14,
+    fontWeight: "semibold",
+    alignSelf: "flex-end",
+    marginRight: 10,
     color: "#64A6F0",
   },
   eventBox: {
