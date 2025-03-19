@@ -25,7 +25,7 @@ export default function AppNavigator() {
       <Stack.Screen name="SignUp" component={SignupScreen} />
       <Stack.Screen name="CreatePassword" component={CreatePasswordScreen} />
 
-      <Stack.Screen name="MainTabs" component={MainNavigator} />
+      <Stack.Screen name="Main" component={MainNavigator} />
     </Stack.Navigator>
   );
 }

@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import { Ionicons } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("window");
 
@@ -50,7 +51,7 @@ export default function HomeScreen() {
           animated: true,
         });
       }
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
@@ -73,16 +74,47 @@ export default function HomeScreen() {
           },
         ]}
       >
+        <View style={styles.infoContainer}>
+          <View style={styles.textContainer}>
+            <Text style={styles.greeting}>Xin chào!</Text>
+            <Text style={styles.name}>Đinh Quốc Việt</Text>
+          </View>
+          <Ionicons name="notifications-outline" size={24} color="#3D8ED4" />
+        </View>
+
         <MapView
           style={styles.map}
           initialRegion={{
             latitude: 21.0285,
             longitude: 105.8542,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
           }}
         >
-          <Marker coordinate={{ latitude: 21.0285, longitude: 105.8542 }} />
+          <Marker
+            coordinate={{ latitude: 21.0285, longitude: 105.8542 }}
+            title="Hồ Hoàn Kiếm"
+          />
+          <Marker
+            coordinate={{ latitude: 21.0376, longitude: 105.8142 }}
+            title="Lăng Bác"
+          />
+          <Marker
+            coordinate={{ latitude: 21.0358, longitude: 105.8285 }}
+            title="Chùa Một Cột"
+          />
+          <Marker
+            coordinate={{ latitude: 21.0282, longitude: 105.8354 }}
+            title="Văn Miếu - Quốc Tử Giám"
+          />
+          <Marker
+            coordinate={{ latitude: 21.057, longitude: 105.825 }}
+            title="Hồ Tây"
+          />
+          <Marker
+            coordinate={{ latitude: 21.04, longitude: 105.864 }}
+            title="Cầu Long Biên"
+          />
         </MapView>
       </Animated.View>
 
@@ -103,11 +135,6 @@ export default function HomeScreen() {
         )}
         scrollEventThrottle={16}
       >
-        <View style={styles.infoContainer}>
-          <Text style={styles.greeting}>Xin chào!</Text>
-          <Text style={styles.name}>Đinh Quốc Việt</Text>
-        </View>
-
         <FlatList
           ref={flatListRef}
           data={sliderData}
@@ -179,7 +206,20 @@ const styles = StyleSheet.create({
     marginTop: 250,
   },
 
-  infoContainer: { padding: 20, backgroundColor: "#fff" },
+  infoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 20,
+    backgroundColor: "transparent",
+    position: "absolute",
+    top: 40,
+    width: "100%",
+    zIndex: 2,
+  },
+  textContainer: {
+    flexDirection: "column",
+  },
   greeting: { fontSize: 18, fontWeight: "bold" },
   name: { fontSize: 20, fontWeight: "bold", color: "#3D8ED4" },
 
@@ -187,7 +227,7 @@ const styles = StyleSheet.create({
   slide: { width, alignItems: "center", justifyContent: "center" },
   slideImage: { width: 350, height: 200, borderRadius: 10 },
 
-  eventContainer: { padding: 20, marginBottom: 100 },
+  eventContainer: { padding: 20, marginBottom: 95 },
   eventTitle: {
     fontSize: 18,
     fontWeight: "bold",

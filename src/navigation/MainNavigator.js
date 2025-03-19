@@ -3,15 +3,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import HomeScreen from "../screens/main/HomeScreen";
+import QRScannerScreen from "../screens/qrscan/QRScannerScreen";
 
 const PromoScreen = () => (
   <View>
     <Text>Promo Screen</Text>
-  </View>
-);
-const QRScreen = () => (
-  <View>
-    <Text>QR Screen</Text>
   </View>
 );
 const HistoryScreen = () => (
@@ -65,7 +61,7 @@ export default function MainNavigator() {
 
       <Tab.Screen
         name="QR"
-        component={QRScreen}
+        component={QRScannerScreen}
         options={{
           tabBarButton: (props) => (
             <CustomQRButton {...props}>

@@ -15,6 +15,8 @@
     "@react-navigation/native": "^7.0.15",
     "@react-navigation/stack": "^7.1.2",
     "expo": "~52.0.38",
+    "expo-barcode-scanner": "^13.0.1",
+    "expo-camera": "~16.0.18",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
     "react-native": "0.76.7",
