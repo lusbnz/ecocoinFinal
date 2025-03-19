@@ -26,13 +26,13 @@ export default function QRScannerScreen() {
       <CameraView
         style={styles.camera}
         barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
-        onBarcodeScanned={({ data }) => alert(`Scanned: ${data}`)}
+        onBarcodeScanned={({ data }) => {
+          console.log(data);
+        }}
         flashMode={flash}
       >
-        {/* Hướng dẫn */}
         <Text style={styles.scanText}>Find a code to scan</Text>
 
-        {/* Overlay */}
         <View style={styles.overlay}>
           <View style={styles.qrFrame}>
             <View style={styles.cornerTopLeft} />
@@ -42,7 +42,6 @@ export default function QRScannerScreen() {
           </View>
         </View>
 
-        {/* Nút bật/tắt flash */}
         <TouchableOpacity
           style={styles.flashButton}
           onPress={() => setFlash(flash === "off" ? "torch" : "off")}
@@ -75,14 +74,14 @@ const styles = StyleSheet.create({
     height: 250,
     borderColor: "rgba(255,255,255,0.8)",
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
   },
   cornerTopLeft: {
     position: "absolute",
-    top: 0,
-    left: 0,
+    top: -10,
+    left: -10,
     width: 40,
     height: 40,
     borderTopWidth: 4,
@@ -91,8 +90,8 @@ const styles = StyleSheet.create({
   },
   cornerTopRight: {
     position: "absolute",
-    top: 0,
-    right: 0,
+    top: -10,
+    right: -10,
     width: 40,
     height: 40,
     borderTopWidth: 4,
@@ -101,8 +100,8 @@ const styles = StyleSheet.create({
   },
   cornerBottomLeft: {
     position: "absolute",
-    bottom: 0,
-    left: 0,
+    bottom: -10,
+    left: -10,
     width: 40,
     height: 40,
     borderBottomWidth: 4,
@@ -111,8 +110,8 @@ const styles = StyleSheet.create({
   },
   cornerBottomRight: {
     position: "absolute",
-    bottom: 0,
-    right: 0,
+    bottom: -10,
+    right: -10,
     width: 40,
     height: 40,
     borderBottomWidth: 4,

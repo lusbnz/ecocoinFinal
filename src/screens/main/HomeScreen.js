@@ -56,6 +56,44 @@ export default function HomeScreen() {
     return () => clearInterval(interval);
   }, []);
 
+  const shakeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const shake = Animated.loop(
+      Animated.sequence([
+        Animated.timing(shakeAnim, {
+          toValue: 10,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+        Animated.timing(shakeAnim, {
+          toValue: -10,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+        Animated.timing(shakeAnim, {
+          toValue: 5,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+        Animated.timing(shakeAnim, {
+          toValue: 0,
+          duration: 100,
+          useNativeDriver: true,
+        }),
+      ])
+    );
+
+    const timeout = setTimeout(() => {
+      shake.start();
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeout);
+      shake.stop();
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
       <Animated.View
@@ -79,7 +117,20 @@ export default function HomeScreen() {
             <Text style={styles.greeting}>Xin chào!</Text>
             <Text style={styles.name}>Đinh Quốc Việt</Text>
           </View>
-          <Ionicons name="notifications-outline" size={24} color="#3D8ED4" />
+          <Animated.View
+            style={{
+              transform: [
+                {
+                  rotate: shakeAnim.interpolate({
+                    inputRange: [-10, 10],
+                    outputRange: ["-10deg", "10deg"],
+                  }),
+                },
+              ],
+            }}
+          >
+            <Ionicons name="notifications-outline" size={24} color="#3D8ED4" />
+          </Animated.View>
         </View>
 
         <MapView
