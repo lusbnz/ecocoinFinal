@@ -47,7 +47,7 @@ export default function ProfileScreen() {
           animated: true,
         });
       }
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);

@@ -11,8 +11,8 @@ import {
 import HomeScreen from "../screens/main/HomeScreen";
 import QRScannerScreen from "../screens/qrscan/QRScannerScreen";
 import { LinearGradient } from "expo-linear-gradient";
-import ProfileScreen from "../screens/main/ProfileScreen";
-import PromoScreen from "../screens/main/PromoScreen";
+import ProfileScreen from "../screens/profile/ProfileScreen";
+import PromoScreen from "../screens/promo/PromoScreen";
 import HistoryScreen from "../screens/history/HistoryScreen";
 
 const Tab = createBottomTabNavigator();

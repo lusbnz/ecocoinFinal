@@ -7,6 +7,7 @@ import {
   Animated,
   FlatList,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
@@ -31,13 +32,7 @@ const sliderData = [
   },
 ];
 
-const SliderItem = ({ item }) => (
-  <View style={styles.slide}>
-    <Image source={{ uri: item.image }} style={styles.slideImage} />
-  </View>
-);
-
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const flatListRef = useRef(null);
   const scrollY = useRef(new Animated.Value(0)).current;
   const currentIndex = useRef(0);
@@ -51,7 +46,7 @@ export default function HomeScreen() {
           animated: true,
         });
       }
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -94,6 +89,21 @@ export default function HomeScreen() {
     };
   }, []);
 
+  const SliderItem = ({ item }) => (
+    <View style={styles.slide}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("BannerDetail", {
+            bannerId: item.id,
+            imageUrl: item.image,
+          })
+        }
+      >
+        <Image source={{ uri: item.image }} style={styles.slideImage} />
+      </TouchableOpacity>
+    </View>
+  );
+  
   return (
     <View style={styles.container}>
       <Animated.View
@@ -204,12 +214,22 @@ export default function HomeScreen() {
             <Text style={styles.eventTitle}>Sự kiện đang diễn ra</Text>
             <Text style={styles.viewMore}>Xem thêm</Text>
           </View>
-          <Image
-            source={{
-              uri: "https://images.pexels.com/photos/349600/pexels-photo-349600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            }}
-            style={styles.eventBox}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("BannerDetail", {
+                bannerId: "4",
+                imageUrl:
+                  "https://images.pexels.com/photos/349600/pexels-photo-349600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              })
+            }
+          >
+            <Image
+              source={{
+                uri: "https://images.pexels.com/photos/349600/pexels-photo-349600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              }}
+              style={styles.eventBox}
+            />
+          </TouchableOpacity>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
@@ -222,12 +242,22 @@ export default function HomeScreen() {
             }}
             style={styles.eventBox}
           />
-          <Image
-            source={{
-              uri: "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            }}
-            style={styles.eventBox}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("BannerDetail", {
+                bannerId: "5",
+                imageUrl:
+                  "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              })
+            }
+          >
+            <Image
+              source={{
+                uri: "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              }}
+              style={styles.eventBox}
+            />
+          </TouchableOpacity>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
@@ -237,12 +267,22 @@ export default function HomeScreen() {
             <Text style={styles.viewMore}>Xem thêm</Text>
           </View>
 
-          <Image
-            source={{
-              uri: "https://images.pexels.com/photos/16241634/pexels-photo-16241634/free-photo-of-thien-nhien-th-c-v-t-la-mau-xanh-la.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            }}
-            style={styles.eventBox}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("BannerDetail", {
+                bannerId: "6",
+                imageUrl:
+                  "https://images.pexels.com/photos/16241634/pexels-photo-16241634/free-photo-of-thien-nhien-th-c-v-t-la-mau-xanh-la.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              })
+            }
+          >
+            <Image
+              source={{
+                uri: "https://images.pexels.com/photos/16241634/pexels-photo-16241634/free-photo-of-thien-nhien-th-c-v-t-la-mau-xanh-la.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              }}
+              style={styles.eventBox}
+            />
+          </TouchableOpacity>
         </View>
       </Animated.ScrollView>
     </View>
