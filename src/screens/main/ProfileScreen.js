@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const { width } = Dimensions.get("window");
 
@@ -52,89 +53,93 @@ export default function ProfileScreen() {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.profileInfo}>
-          <Image
-            source={{
-              uri: "https://images.pexels.com/photos/30894155/pexels-photo-30894155/free-photo-of-chang-trai-tr-m-t-trong-b-i-c-nh-do-th.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            }}
-            style={styles.avatar}
-          />
-          <View>
-            <View style={styles.nameContainer}>
-              <Text style={styles.name}>Đinh Quốc Việt</Text>
-              <FontAwesome5
-                name="medal"
-                size={20}
-                color="#FFD700"
-                style={styles.badgeIcon}
-              />
+    <LinearGradient colors={["#3D8ED4", "#E5E5E5"]} style={styles.gradient}>
+      <ScrollView style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.profileInfo}>
+            <Image
+              source={{
+                uri: "https://images.pexels.com/photos/30894155/pexels-photo-30894155/free-photo-of-chang-trai-tr-m-t-trong-b-i-c-nh-do-th.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              }}
+              style={styles.avatar}
+            />
+            <View>
+              <View style={styles.nameContainer}>
+                <Text style={styles.name}>Đinh Quốc Việt</Text>
+                <FontAwesome5
+                  name="medal"
+                  size={20}
+                  color="#FFD700"
+                  style={styles.badgeIcon}
+                />
+              </View>
+              <Text style={styles.rank}>Thành viên Vàng</Text>
             </View>
-            <Text style={styles.rank}>Thành viên Vàng</Text>
           </View>
         </View>
-      </View>
-      <View style={styles.pointsContainer}>
-        <Text style={styles.pointsText}>873 Điểm tích lũy</Text>
-        <MaterialIcons name="monetization-on" size={24} color="#F4A261" />
-      </View>
-      <View style={styles.detailsContainer}>
-        <View style={styles.detailsHeader}>
-          <Text style={styles.sectionTitle}>Thông tin chi tiết</Text>
-          <MaterialIcons name="edit" size={22} color="#3D8ED4" />
+        <View style={styles.pointsContainer}>
+          <Text style={styles.pointsText}>873 Điểm tích lũy</Text>
+          <MaterialIcons name="monetization-on" size={24} color="#F4A261" />
         </View>
-        <Text>Số điện thoại: 0353808048</Text>
-        <Text>Giới tính: Nam</Text>
-        <Text>Tuổi: 22</Text>
+        <View style={styles.detailsContainer}>
+          <View style={styles.detailsHeader}>
+            <Text style={styles.sectionTitle}>Thông tin chi tiết</Text>
+            <MaterialIcons name="edit" size={22} color="#3D8ED4" />
+          </View>
+          <Text>Số điện thoại: 0353808048</Text>
+          <Text>Giới tính: Nam</Text>
+          <Text>Tuổi: 22</Text>
 
-        <Text style={styles.sectionTitleCheckin}>Checkin:</Text>
-        <FlatList
-          ref={flatListRef}
-          data={checkinImages}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <Image source={{ uri: item.image }} style={styles.checkinImage} />
-          )}
-        />
-      </View>
+          <Text style={styles.sectionTitleCheckin}>Checkin:</Text>
+          <FlatList
+            ref={flatListRef}
+            data={checkinImages}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <Image source={{ uri: item.image }} style={styles.checkinImage} />
+            )}
+          />
+        </View>
 
-      <View style={styles.menuContainer}>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text>Mã ưu đãi của tôi</Text>
-          <Ionicons name="chevron-forward" size={18} color="#888" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text>Lịch sử hoạt động</Text>
-          <Ionicons name="chevron-forward" size={18} color="#888" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text>Feedback</Text>
-          <Ionicons name="chevron-forward" size={18} color="#888" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text>Ngôn ngữ</Text>
-          <Ionicons name="chevron-forward" size={18} color="#888" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem}>
-          <Text>Đổi mật khẩu</Text>
-          <Ionicons name="chevron-forward" size={18} color="#888" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.logoutButton}>
-          <Text style={styles.logoutText}>Đăng xuất</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+        <View style={styles.menuContainer}>
+          <TouchableOpacity style={styles.menuItem}>
+            <Text>Mã ưu đãi của tôi</Text>
+            <Ionicons name="chevron-forward" size={18} color="#888" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuItem}>
+            <Text>Lịch sử hoạt động</Text>
+            <Ionicons name="chevron-forward" size={18} color="#888" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuItem}>
+            <Text>Feedback</Text>
+            <Ionicons name="chevron-forward" size={18} color="#888" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuItem}>
+            <Text>Ngôn ngữ</Text>
+            <Ionicons name="chevron-forward" size={18} color="#888" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.menuItem}>
+            <Text>Đổi mật khẩu</Text>
+            <Ionicons name="chevron-forward" size={18} color="#888" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.logoutButton}>
+            <Text style={styles.logoutText}>Đăng xuất</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
     marginTop: 50,
   },
   header: {
@@ -202,7 +207,8 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     paddingHorizontal: 20,
-    paddingBottom: 200,
+    paddingBottom: 20,
+    marginBottom: 120,
     backgroundColor: "#FFFFFF",
     marginTop: 20,
     width: "90%",

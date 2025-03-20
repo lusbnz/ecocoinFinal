@@ -198,15 +198,24 @@ export default function HomeScreen() {
         />
 
         <View style={styles.eventContainer}>
-          <Text style={styles.eventTitle}>Sự kiện đang diễn ra</Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={styles.eventTitle}>Sự kiện đang diễn ra</Text>
+            <Text style={styles.viewMore}>Xem thêm</Text>
+          </View>
           <Image
             source={{
               uri: "https://images.pexels.com/photos/349600/pexels-photo-349600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
             }}
             style={styles.eventBox}
           />
-          <Text style={styles.viewMore}>Xem thêm</Text>
-          <Text style={styles.eventTitle}>Có thể bạn quan tâm</Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={styles.eventTitle}>Có thể bạn quan tâm</Text>
+            <Text style={styles.viewMore}>Xem thêm</Text>
+          </View>
           <Image
             source={{
               uri: "https://images.pexels.com/photos/28954361/pexels-photo-28954361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -219,15 +228,21 @@ export default function HomeScreen() {
             }}
             style={styles.eventBox}
           />
-          <Text style={styles.viewMore}>Xem thêm</Text>
-          <Text style={styles.eventTitle}>Phân loại rác thải như thế nào?</Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={styles.eventTitle}>
+              Phân loại rác thải như thế nào?
+            </Text>
+            <Text style={styles.viewMore}>Xem thêm</Text>
+          </View>
+
           <Image
             source={{
               uri: "https://images.pexels.com/photos/16241634/pexels-photo-16241634/free-photo-of-thien-nhien-th-c-v-t-la-mau-xanh-la.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
             }}
             style={styles.eventBox}
           />
-          <Text style={styles.viewMore}>Xem thêm</Text>
         </View>
       </Animated.ScrollView>
     </View>

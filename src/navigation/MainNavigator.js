@@ -12,17 +12,8 @@ import HomeScreen from "../screens/main/HomeScreen";
 import QRScannerScreen from "../screens/qrscan/QRScannerScreen";
 import { LinearGradient } from "expo-linear-gradient";
 import ProfileScreen from "../screens/main/ProfileScreen";
-
-const PromoScreen = () => (
-  <View style={styles.screen}>
-    <Text>Promo Screen</Text>
-  </View>
-);
-const HistoryScreen = () => (
-  <View style={styles.screen}>
-    <Text>History Screen</Text>
-  </View>
-);
+import PromoScreen from "../screens/main/PromoScreen";
+import HistoryScreen from "../screens/history/HistoryScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -57,7 +48,7 @@ const CustomQRButton = ({ children, onPress }) => {
         onPressOut={handlePressOut}
       >
         <LinearGradient
-          colors={["#64A6F0", "#3D8BEB"]}
+          colors={["#E5E5E5", "#3D8BEB"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.qrButton}

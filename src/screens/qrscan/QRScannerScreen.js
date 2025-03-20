@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { CameraView, Camera } from "expo-camera";
-import { Ionicons } from "@expo/vector-icons";
-
 export default function QRScannerScreen() {
   const [hasPermission, setHasPermission] = useState(null);
   const [flash, setFlash] = useState("off");
+  const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -13,6 +9,14 @@ export default function QRScannerScreen() {
       setHasPermission(status === "granted");
     })();
   }, []);
+
+  const handleBarcodeScanned = ({ data }) => {
+    if (!scanned) {
+      setScanned(true);
+      console.log("Scanned QR Code:", data);
+      setTimeout(() => setScanned(false), 3000); 
+    }
+  };
 
   if (hasPermission === null) {
     return <Text>Requesting camera permission...</Text>;
@@ -26,9 +30,7 @@ export default function QRScannerScreen() {
       <CameraView
         style={styles.camera}
         barcodeScannerSettings={{ barcodeTypes: ["qr"] }}
-        onBarcodeScanned={({ data }) => {
-          console.log(data);
-        }}
+        onBarcodeScanned={scanned ? undefined : handleBarcodeScanned} 
         flashMode={flash}
       >
         <Text style={styles.scanText}>Find a code to scan</Text>
@@ -56,85 +58,3 @@ export default function QRScannerScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  camera: {
-    flex: 1,
-  },
-  overlay: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  qrFrame: {
-    width: 250,
-    height: 250,
-    borderColor: "rgba(255,255,255,0.8)",
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  cornerTopLeft: {
-    position: "absolute",
-    top: -10,
-    left: -10,
-    width: 40,
-    height: 40,
-    borderTopWidth: 4,
-    borderLeftWidth: 4,
-    borderColor: "white",
-  },
-  cornerTopRight: {
-    position: "absolute",
-    top: -10,
-    right: -10,
-    width: 40,
-    height: 40,
-    borderTopWidth: 4,
-    borderRightWidth: 4,
-    borderColor: "white",
-  },
-  cornerBottomLeft: {
-    position: "absolute",
-    bottom: -10,
-    left: -10,
-    width: 40,
-    height: 40,
-    borderBottomWidth: 4,
-    borderLeftWidth: 4,
-    borderColor: "white",
-  },
-  cornerBottomRight: {
-    position: "absolute",
-    bottom: -10,
-    right: -10,
-    width: 40,
-    height: 40,
-    borderBottomWidth: 4,
-    borderRightWidth: 4,
-    borderColor: "white",
-  },
-  flashButton: {
-    position: "absolute",
-    bottom: 50,
-    alignSelf: "center",
-    backgroundColor: "rgba(0,0,0,0.6)",
-    padding: 15,
-    borderRadius: 50,
-  },
-  scanText: {
-    position: "absolute",
-    top: 100,
-    alignSelf: "center",
-    color: "white",
-    fontSize: 18,
-    fontWeight: "bold",
-    backgroundColor: "rgba(0,0,0,0.6)",
-    padding: 10,
-    borderRadius: 10,
-  },
-});
