@@ -48,7 +48,7 @@ const CustomQRButton = ({ children, onPress }) => {
         onPressOut={handlePressOut}
       >
         <LinearGradient
-          colors={["#E5E5E5", "#3D8BEB"]}
+          colors={["#3D8BEB", "#3D8BEB"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.qrButton}

@@ -33,7 +33,7 @@ const checkinImages = [
   },
 ];
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }) {
   const flatListRef = useRef(null);
   const currentIndex = useRef(0);
 
@@ -105,11 +105,11 @@ export default function ProfileScreen() {
         </View>
 
         <View style={styles.menuContainer}>
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("Promo")}>
             <Text>Mã ưu đãi của tôi</Text>
             <Ionicons name="chevron-forward" size={18} color="#888" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("History")}>
             <Text>Lịch sử hoạt động</Text>
             <Ionicons name="chevron-forward" size={18} color="#888" />
           </TouchableOpacity>
@@ -125,7 +125,7 @@ export default function ProfileScreen() {
             <Text>Đổi mật khẩu</Text>
             <Ionicons name="chevron-forward" size={18} color="#888" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.logoutButton}>
+          <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate("SignIn")}>
             <Text style={styles.logoutText}>Đăng xuất</Text>
           </TouchableOpacity>
         </View>
@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginLeft: "auto",
     marginRight: "auto",
+    marginTop: 20,
     borderRadius: 20,
     padding: 20,
     alignItems: "start",

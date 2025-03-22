@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import QRCode from "react-native-qrcode-svg";
+import Toast from "react-native-toast-message";
 
 const TransactionDetailScreen = ({ route, navigation }) => {
   const { banner } = route.params;
@@ -40,7 +41,17 @@ const TransactionDetailScreen = ({ route, navigation }) => {
       </Text>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.saveButton}>
+        <TouchableOpacity
+          style={styles.saveButton}
+          onPress={() => {
+            Toast.show({
+              type: "success",
+              text1: "Thông báo",
+              text2: "Đã lưu thành công!",
+            });
+            navigation.navigate("Main");
+          }}
+        >
           <Text style={styles.buttonTextPrimary}>Lưu</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.shareButton} onPress={handleShare}>
@@ -70,7 +81,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   qrContainer: {
-    alignItems: "center",  
+    alignItems: "center",
     justifyContent: "center",
     width: "100%",
     marginVertical: 20,

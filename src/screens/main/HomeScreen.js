@@ -103,7 +103,7 @@ export default function HomeScreen({ navigation }) {
       </TouchableOpacity>
     </View>
   );
-  
+
   return (
     <View style={styles.container}>
       <Animated.View
@@ -209,10 +209,12 @@ export default function HomeScreen({ navigation }) {
 
         <View style={styles.eventContainer}>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
+            style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}
           >
             <Text style={styles.eventTitle}>Sự kiện đang diễn ra</Text>
-            <Text style={styles.viewMore}>Xem thêm</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
+              <Text style={styles.viewMore}>Xem thêm</Text>
+            </TouchableOpacity>
           </View>
           <TouchableOpacity
             onPress={() =>
@@ -231,10 +233,12 @@ export default function HomeScreen({ navigation }) {
             />
           </TouchableOpacity>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
+            style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}
           >
             <Text style={styles.eventTitle}>Có thể bạn quan tâm</Text>
-            <Text style={styles.viewMore}>Xem thêm</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
+              <Text style={styles.viewMore}>Xem thêm</Text>
+            </TouchableOpacity>
           </View>
           <Image
             source={{
@@ -259,22 +263,15 @@ export default function HomeScreen({ navigation }) {
             />
           </TouchableOpacity>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
+            style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}
           >
             <Text style={styles.eventTitle}>
               Phân loại rác thải như thế nào?
             </Text>
-            <Text style={styles.viewMore}>Xem thêm</Text>
           </View>
 
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("BannerDetail", {
-                bannerId: "6",
-                imageUrl:
-                  "https://images.pexels.com/photos/16241634/pexels-photo-16241634/free-photo-of-thien-nhien-th-c-v-t-la-mau-xanh-la.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-              })
-            }
+            onPress={() => navigation.navigate("PlasticIdentification")}
           >
             <Image
               source={{
