@@ -63,7 +63,7 @@ const TransactionDetailScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#fff", paddingTop: 50 },
+  container: { flex: 1, paddingHorizontal: 20, backgroundColor: "#fff", paddingBottom: 20 },
   bannerImage: {
     width: "100%",
     height: 150,

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -8,9 +8,11 @@ import {
   FlatList,
   Dimensions,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
+import { ActivityIndicator } from "react-native-paper";
 
 const { width } = Dimensions.get("window");
 
@@ -36,6 +38,15 @@ export default function HomeScreen({ navigation }) {
   const flatListRef = useRef(null);
   const scrollY = useRef(new Animated.Value(0)).current;
   const currentIndex = useRef(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -104,7 +115,11 @@ export default function HomeScreen({ navigation }) {
     </View>
   );
 
-  return (
+  return loading ? (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ActivityIndicator size="large" color="#3D8ED4" />
+    </View>
+  ) : (
     <View style={styles.container}>
       <Animated.View
         style={[
@@ -209,7 +224,11 @@ export default function HomeScreen({ navigation }) {
 
         <View style={styles.eventContainer}>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <Text style={styles.eventTitle}>Sự kiện đang diễn ra</Text>
             <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
@@ -233,37 +252,67 @@ export default function HomeScreen({ navigation }) {
             />
           </TouchableOpacity>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <Text style={styles.eventTitle}>Có thể bạn quan tâm</Text>
             <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
               <Text style={styles.viewMore}>Xem thêm</Text>
             </TouchableOpacity>
           </View>
-          <Image
+
+          <ImageBackground
+            style={styles.promoCard}
             source={{
               uri: "https://images.pexels.com/photos/28954361/pexels-photo-28954361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
             }}
-            style={styles.eventBox}
-          />
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("BannerDetail", {
-                bannerId: "5",
-                imageUrl:
-                  "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-              })
-            }
+            imageStyle={{ borderRadius: 20 }}
           >
-            <Image
-              source={{
-                uri: "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+            <Text style={styles.promoText}>Giảm 20% cho đơn đầu tiên</Text>
+            <TouchableOpacity
+              style={styles.ctaButton}
+              onPress={() => {
+                navigation.navigate("BannerDetail", {
+                  bannerId: "4",
+                  imageUrl:
+                    "https://images.pexels.com/photos/28954361/pexels-photo-28954361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                });
               }}
-              style={styles.eventBox}
-            />
-          </TouchableOpacity>
+            >
+              <Text style={styles.ctaText}>Thu thập</Text>
+            </TouchableOpacity>
+          </ImageBackground>
+
+          <ImageBackground
+            style={styles.promoCard}
+            source={{
+              uri: "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+            }}
+            imageStyle={{ borderRadius: 20 }}
+          >
+            <Text style={styles.promoText}>Miễn phí giao hàng</Text>
+            <TouchableOpacity
+              style={styles.ctaButton}
+              onPress={() => {
+                navigation.navigate("BannerDetail", {
+                  bannerId: "5",
+                  imageUrl:
+                    "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                });
+              }}
+            >
+              <Text style={styles.ctaText}>Thu thập</Text>
+            </TouchableOpacity>
+          </ImageBackground>
           <View
-            style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
             <Text style={styles.eventTitle}>
               Phân loại rác thải như thế nào?
@@ -350,4 +399,23 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 10,
   },
+  promoCard: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 16,
+    marginVertical: 10,
+    height: 160,
+  },
+  promoText: { fontSize: 16, fontWeight: "bold", color: "white" },
+  ctaButton: {
+    backgroundColor: "#3D8ED4",
+    paddingHorizontal: 16,
+    borderRadius: 10,
+    height: 30,
+    marginTop: 100,
+    alignItems: "center",
+    justifyContent: "center",
+    display: "flex",
+  },
+  ctaText: { color: "white", fontWeight: "normal" },
 });

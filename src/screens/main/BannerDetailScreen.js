@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,10 +9,20 @@ import {
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { ActivityIndicator } from "react-native-paper";
 
 const BannerDetailScreen = ({ route, navigation }) => {
   const { bannerId, imageUrl } = route.params;
   const [selectedPoint, setSelectedPoint] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const banner = {
     id: bannerId,
@@ -28,7 +38,11 @@ const BannerDetailScreen = ({ route, navigation }) => {
     ],
   };
 
-  return (
+  return loading ? (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <ActivityIndicator size="large" color="#3D8ED4" />
+    </View>
+  ) : (
     <ScrollView style={styles.container}>
       <Image source={{ uri: banner.image }} style={styles.bannerImage} />
       <Text style={styles.description}>{banner.description}</Text>
@@ -68,7 +82,9 @@ const BannerDetailScreen = ({ route, navigation }) => {
       <TouchableOpacity
         style={[styles.redeemButton, !selectedPoint && styles.disabledButton]}
         disabled={!selectedPoint}
-        onPress={() => navigation.navigate("TransactionDetail", { banner: banner })}
+        onPress={() =>
+          navigation.navigate("TransactionDetail", { banner: banner })
+        }
       >
         <Text style={styles.redeemText}>Quy đổi</Text>
       </TouchableOpacity>
@@ -77,12 +93,11 @@ const BannerDetailScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#fff", paddingTop: 50 },
+  container: { flex: 1, padding: 20, backgroundColor: "#fff", paddingTop: 0 },
   bannerImage: {
     width: "100%",
     height: 150,
     borderRadius: 10,
-    marginTop: 10,
     marginBottom: 30,
   },
   description: {

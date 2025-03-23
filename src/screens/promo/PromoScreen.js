@@ -77,7 +77,7 @@ export default function PromoScreen({ navigation }) {
   const scrollRef = useRef(null);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.searchBar}>
         <Ionicons name="search" size={20} color="#888" style={styles.icon} />
         <TextInput placeholder="Search" style={styles.searchInput} />
@@ -120,7 +120,7 @@ export default function PromoScreen({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.tabButton]}
-          onPress={() => setSelectedTab("ưu đãi")}
+          onPress={() => navigation.navigate("MyCoupons")}
         >
           <View
             style={{
@@ -161,7 +161,7 @@ export default function PromoScreen({ navigation }) {
           </ImageBackground>
         )}
       />
-    </View>
+    </ScrollView>
   );
 }
 
