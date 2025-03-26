@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import Toast from "react-native-toast-message";
+import { Ionicons } from "@expo/vector-icons";
 
 const TransactionDetailScreen = ({ route, navigation }) => {
   const { banner } = route.params;
@@ -26,6 +27,17 @@ const TransactionDetailScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{ flexDirection: "row" }}
+        >
+          <Ionicons name="chevron-back" size={18} color="#888" />
+          <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5 }}>
+            Quay lại
+          </Text>
+        </TouchableOpacity>
+      </View>
       <Image source={{ uri: banner.image }} style={styles.bannerImage} />
       <Text style={styles.description}>{banner.description}</Text>
 
@@ -63,7 +75,7 @@ const TransactionDetailScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingHorizontal: 20, backgroundColor: "#fff", paddingBottom: 20 },
+  container: { flex: 1, paddingHorizontal: 20, backgroundColor: "#fff", paddingTop: 50, paddingBottom: 20 },
   bannerImage: {
     width: "100%",
     height: 150,
@@ -112,17 +124,17 @@ const styles = StyleSheet.create({
   buttonContainer: { flexDirection: "row", marginTop: 20 },
   saveButton: {
     borderWidth: 1,
-    borderColor: "#64A6F0",
+    borderColor: "#4f7566",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 30,
     marginRight: 10,
     flex: 1,
     alignItems: "center",
-    color: "#64A6F0",
+    color: "#4f7566",
   },
   shareButton: {
-    backgroundColor: "#64A6F0",
+    backgroundColor: "#4f7566",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 30,
@@ -131,7 +143,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   buttonText: { fontSize: 16, fontWeight: "bold", color: "#fff" },
-  buttonTextPrimary: { fontSize: 16, fontWeight: "bold", color: "#64A6F0" },
+  buttonTextPrimary: { fontSize: 16, fontWeight: "bold", color: "#4f7566" },
 });
 
 export default TransactionDetailScreen;
