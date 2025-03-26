@@ -5,39 +5,34 @@ import {
   StyleSheet,
   Image,
   Animated,
-  FlatList,
-  Dimensions,
   TouchableOpacity,
   ImageBackground,
+  ScrollView,
 } from "react-native";
-import MapView, { Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
 import { ActivityIndicator } from "react-native-paper";
 
-const { width } = Dimensions.get("window");
-
-const sliderData = [
+const category = [
   {
-    id: "1",
+    name: "Chai nhựa",
+    objectsCount: "150 điểm thu gom",
     image:
-      "https://images.pexels.com/photos/11733089/pexels-photo-11733089.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/802221/pexels-photo-802221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
-    id: "2",
+    name: "Chai nhôm",
+    objectsCount: "120 điểm thu gom",
     image:
-      "https://images.pexels.com/photos/3266777/pexels-photo-3266777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/2983100/pexels-photo-2983100.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
-    id: "3",
+    name: "Tái chế",
+    objectsCount: "200 trạm tái chế",
     image:
-      "https://images.pexels.com/photos/9531923/pexels-photo-9531923.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://images.pexels.com/photos/15772324/pexels-photo-15772324/free-photo-of-chai-lon-tai-ch-nh-a.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
 ];
-
 export default function HomeScreen({ navigation }) {
-  const flatListRef = useRef(null);
-  const scrollY = useRef(new Animated.Value(0)).current;
-  const currentIndex = useRef(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,20 +41,6 @@ export default function HomeScreen({ navigation }) {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (flatListRef.current) {
-        currentIndex.current = (currentIndex.current + 1) % sliderData.length;
-        flatListRef.current.scrollToIndex({
-          index: currentIndex.current,
-          animated: true,
-        });
-      }
-    }, 5000);
-
-    return () => clearInterval(interval);
   }, []);
 
   const shakeAnim = useRef(new Animated.Value(0)).current;
@@ -100,262 +81,180 @@ export default function HomeScreen({ navigation }) {
     };
   }, []);
 
-  const SliderItem = ({ item }) => (
-    <View style={styles.slide}>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("BannerDetail", {
-            bannerId: item.id,
-            imageUrl: item.image,
-          })
-        }
-      >
-        <Image source={{ uri: item.image }} style={styles.slideImage} />
-      </TouchableOpacity>
-    </View>
-  );
-
   return loading ? (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="large" color="#3D8ED4" />
+      <ActivityIndicator size="small" color="#4F7566" />
     </View>
   ) : (
-    <View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.mapContainer,
-          {
-            transform: [
-              {
-                translateY: scrollY.interpolate({
-                  inputRange: [0, 200],
-                  outputRange: [0, -500],
-                  extrapolate: "clamp",
-                }),
-              },
-            ],
-          },
-        ]}
-      >
-        <View style={styles.infoContainer}>
-          <View style={styles.textContainer}>
-            <Text style={styles.greeting}>Xin chào!</Text>
-            <Text style={styles.name}>Đinh Quốc Việt</Text>
-          </View>
-          <Animated.View
-            style={{
-              transform: [
-                {
-                  rotate: shakeAnim.interpolate({
-                    inputRange: [-10, 10],
-                    outputRange: ["-10deg", "10deg"],
-                  }),
-                },
-              ],
-            }}
-          >
-            <Ionicons name="notifications-outline" size={24} color="#3D8ED4" />
-          </Animated.View>
+    <ScrollView style={styles.container}>
+      <View style={styles.infoContainer}>
+        <View style={styles.textContainer}>
+          <Text style={styles.greeting}>Xin chào!</Text>
+          <Text style={styles.name}>Đinh Quốc Việt</Text>
         </View>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+          <TouchableOpacity onPress={() => navigation.navigate("QRScan")}>
+            <Ionicons name="scan" size={24} color="#4F7566" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Notifications")}
+          >
+            <Animated.View
+              style={{
+                transform: [
+                  {
+                    rotate: shakeAnim.interpolate({
+                      inputRange: [-10, 10],
+                      outputRange: ["-10deg", "10deg"],
+                    }),
+                  },
+                ],
+              }}
+            >
+              <Ionicons
+                name="notifications-outline"
+                size={24}
+                color="#4F7566"
+              />
+            </Animated.View>
+          </TouchableOpacity>
+        </View>
+      </View>
 
-        <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: 21.0285,
-            longitude: 105.8542,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.categoryContainer}
+      >
+        {category.map((cate, index) => (
+          <View key={index} style={styles.categoryCard}>
+            <Image source={{ uri: cate.image }} style={styles.categoryImage} />
+            <View style={styles.categoryInfo}>
+              <Text style={styles.categoryName}>{cate.name}</Text>
+              <Text style={styles.categoryObjects}>{cate.objectsCount}</Text>
+            </View>
+          </View>
+        ))}
+      </ScrollView>
+
+      <View style={styles.eventContainer}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 10,
           }}
         >
-          <Marker
-            coordinate={{ latitude: 21.0285, longitude: 105.8542 }}
-            title="Hồ Hoàn Kiếm"
-          />
-          <Marker
-            coordinate={{ latitude: 21.0376, longitude: 105.8142 }}
-            title="Lăng Bác"
-          />
-          <Marker
-            coordinate={{ latitude: 21.0358, longitude: 105.8285 }}
-            title="Chùa Một Cột"
-          />
-          <Marker
-            coordinate={{ latitude: 21.0282, longitude: 105.8354 }}
-            title="Văn Miếu - Quốc Tử Giám"
-          />
-          <Marker
-            coordinate={{ latitude: 21.057, longitude: 105.825 }}
-            title="Hồ Tây"
-          />
-          <Marker
-            coordinate={{ latitude: 21.04, longitude: 105.864 }}
-            title="Cầu Long Biên"
-          />
-        </MapView>
-      </Animated.View>
-
-      <Animated.ScrollView
-        style={[
-          styles.content,
-          {
-            marginTop: scrollY.interpolate({
-              inputRange: [0, 200],
-              outputRange: [250, 0],
-              extrapolate: "clamp",
-            }),
-          },
-        ]}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: false }
-        )}
-        scrollEventThrottle={16}
-      >
-        <FlatList
-          ref={flatListRef}
-          data={sliderData}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <SliderItem item={item} />}
-          style={styles.slider}
-        />
-
-        <View style={styles.eventContainer}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
+          <Text style={styles.eventTitle}>Sự kiện đang diễn ra</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
+            <Ionicons name="chevron-forward" size={18} color="#888" />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("BannerDetail", {
+              bannerId: "4",
+              imageUrl:
+                "https://images.pexels.com/photos/349600/pexels-photo-349600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+            })
+          }
+        >
+          <Image
+            source={{
+              uri: "https://images.pexels.com/photos/349600/pexels-photo-349600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
             }}
-          >
-            <Text style={styles.eventTitle}>Sự kiện đang diễn ra</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
-              <Text style={styles.viewMore}>Xem thêm</Text>
-            </TouchableOpacity>
-          </View>
+            style={styles.eventBox}
+          />
+        </TouchableOpacity>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 10,
+          }}
+        >
+          <Text style={styles.eventTitle}>Có thể bạn quan tâm</Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
+            <Ionicons name="chevron-forward" size={18} color="#888" />
+          </TouchableOpacity>
+        </View>
+
+        <ImageBackground
+          style={styles.promoCard}
+          source={{
+            uri: "https://images.pexels.com/photos/28954361/pexels-photo-28954361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          }}
+          imageStyle={{ borderRadius: 20 }}
+        >
+          <Text style={styles.promoText}>Giảm 20% cho đơn đầu tiên</Text>
           <TouchableOpacity
-            onPress={() =>
+            style={styles.ctaButton}
+            onPress={() => {
               navigation.navigate("BannerDetail", {
                 bannerId: "4",
                 imageUrl:
-                  "https://images.pexels.com/photos/349600/pexels-photo-349600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-              })
-            }
+                  "https://images.pexels.com/photos/28954361/pexels-photo-28954361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              });
+            }}
           >
-            <Image
-              source={{
-                uri: "https://images.pexels.com/photos/349600/pexels-photo-349600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-              }}
-              style={styles.eventBox}
-            />
+            <Text style={styles.ctaText}>Thu thập</Text>
           </TouchableOpacity>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Text style={styles.eventTitle}>Có thể bạn quan tâm</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
-              <Text style={styles.viewMore}>Xem thêm</Text>
-            </TouchableOpacity>
-          </View>
+        </ImageBackground>
 
-          <ImageBackground
-            style={styles.promoCard}
-            source={{
-              uri: "https://images.pexels.com/photos/28954361/pexels-photo-28954361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            }}
-            imageStyle={{ borderRadius: 20 }}
-          >
-            <Text style={styles.promoText}>Giảm 20% cho đơn đầu tiên</Text>
-            <TouchableOpacity
-              style={styles.ctaButton}
-              onPress={() => {
-                navigation.navigate("BannerDetail", {
-                  bannerId: "4",
-                  imageUrl:
-                    "https://images.pexels.com/photos/28954361/pexels-photo-28954361.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                });
-              }}
-            >
-              <Text style={styles.ctaText}>Thu thập</Text>
-            </TouchableOpacity>
-          </ImageBackground>
-
-          <ImageBackground
-            style={styles.promoCard}
-            source={{
-              uri: "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-            }}
-            imageStyle={{ borderRadius: 20 }}
-          >
-            <Text style={styles.promoText}>Miễn phí giao hàng</Text>
-            <TouchableOpacity
-              style={styles.ctaButton}
-              onPress={() => {
-                navigation.navigate("BannerDetail", {
-                  bannerId: "5",
-                  imageUrl:
-                    "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                });
-              }}
-            >
-              <Text style={styles.ctaText}>Thu thập</Text>
-            </TouchableOpacity>
-          </ImageBackground>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Text style={styles.eventTitle}>
-              Phân loại rác thải như thế nào?
-            </Text>
-          </View>
-
+        <ImageBackground
+          style={styles.promoCard}
+          source={{
+            uri: "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+          }}
+          imageStyle={{ borderRadius: 20 }}
+        >
+          <Text style={styles.promoText}>Miễn phí giao hàng</Text>
           <TouchableOpacity
-            onPress={() => navigation.navigate("PlasticIdentification")}
+            style={styles.ctaButton}
+            onPress={() => {
+              navigation.navigate("BannerDetail", {
+                bannerId: "5",
+                imageUrl:
+                  "https://images.pexels.com/photos/23709338/pexels-photo-23709338/free-photo-of-th-c-v-t-hoa-tan-la-d-c-than.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              });
+            }}
           >
-            <Image
-              source={{
-                uri: "https://images.pexels.com/photos/16241634/pexels-photo-16241634/free-photo-of-thien-nhien-th-c-v-t-la-mau-xanh-la.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-              }}
-              style={styles.eventBox}
-            />
+            <Text style={styles.ctaText}>Thu thập</Text>
           </TouchableOpacity>
+        </ImageBackground>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 10,
+          }}
+        >
+          <Text style={styles.eventTitle}>Phân loại rác thải như thế nào?</Text>
         </View>
-      </Animated.ScrollView>
-    </View>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("PlasticIdentification")}
+        >
+          <Image
+            source={{
+              uri: "https://images.pexels.com/photos/16241634/pexels-photo-16241634/free-photo-of-thien-nhien-th-c-v-t-la-mau-xanh-la.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+            }}
+            style={styles.eventBox}
+          />
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-
-  mapContainer: {
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    height: 250,
-    zIndex: 1,
-  },
-
-  map: {
-    width: "100%",
-    height: "100%",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-
-  content: {
-    zIndex: 2,
-    marginTop: 250,
+  container: {
+    flex: 1,
+    paddingTop: 50,
+    backgroundColor: "#FFFFFF",
   },
 
   infoContainer: {
@@ -364,39 +263,74 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 20,
     backgroundColor: "transparent",
-    position: "absolute",
-    top: 40,
     width: "100%",
-    zIndex: 2,
   },
   textContainer: {
     flexDirection: "column",
   },
   greeting: { fontSize: 18, fontWeight: "bold" },
-  name: { fontSize: 20, fontWeight: "bold", color: "#3D8ED4" },
+  name: { fontSize: 20, fontWeight: "bold", color: "#4F7566" },
 
-  slider: { marginTop: 10 },
-  slide: { width, alignItems: "center", justifyContent: "center" },
-  slideImage: { width: 350, height: 200, borderRadius: 10 },
-
+  masonry: {
+    marginHorizontal: 10,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  categoryContainer: {
+    paddingHorizontal: 20,
+  },
+  categoryCard: {
+    width: 250,
+    height: 100,
+    marginRight: 10,
+    borderRadius: 20,
+    overflow: "hidden",
+    backgroundColor: "#EEEEEE",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  categoryInfo: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 0,
+  },
+  categoryImage: {
+    padding: 10,
+    borderRadius: 15,
+    width: 90,
+    height: 90,
+    resizeMode: "cover",
+  },
+  categoryName: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  categoryObjects: {
+    fontSize: 12,
+    color: "#888",
+  },
   eventContainer: { padding: 20, marginBottom: 95 },
   eventTitle: {
     fontSize: 18,
     fontWeight: "bold",
     marginTop: 10,
-    color: "#64A6F0",
+    color: "#222524",
   },
   viewMore: {
     fontSize: 14,
     fontWeight: "semibold",
     alignSelf: "flex-end",
     marginRight: 10,
-    color: "#64A6F0",
+    color: "#222524",
   },
   eventBox: {
     height: 180,
     backgroundColor: "#ddd",
-    borderRadius: 10,
+    borderRadius: 20,
     marginVertical: 10,
   },
   promoCard: {
@@ -406,16 +340,16 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     height: 160,
   },
-  promoText: { fontSize: 16, fontWeight: "bold", color: "white" },
+  promoText: { fontSize: 16, fontWeight: "800", color: "#FFFFFF" },
   ctaButton: {
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "white",
     paddingHorizontal: 16,
-    borderRadius: 10,
+    borderRadius: 20,
     height: 30,
     marginTop: 100,
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
   },
-  ctaText: { color: "white", fontWeight: "normal" },
+  ctaText: { color: "#4F7566", fontWeight: "normal" },
 });

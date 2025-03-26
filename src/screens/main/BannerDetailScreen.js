@@ -44,6 +44,17 @@ const BannerDetailScreen = ({ route, navigation }) => {
     </View>
   ) : (
     <ScrollView style={styles.container}>
+       <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{ flexDirection: "row" }}
+        >
+          <Ionicons name="chevron-back" size={18} color="#888" />
+          <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5 }}>
+            Quay lại
+          </Text>
+        </TouchableOpacity>
+      </View>
       <Image source={{ uri: banner.image }} style={styles.bannerImage} />
       <Text style={styles.description}>{banner.description}</Text>
 
@@ -93,11 +104,11 @@ const BannerDetailScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#fff", paddingTop: 0 },
+  container: { flex: 1, padding: 20, backgroundColor: "#fff", paddingTop: 50, },
   bannerImage: {
     width: "100%",
     height: 150,
-    borderRadius: 10,
+    borderRadius: 20,
     marginBottom: 30,
   },
   description: {
@@ -109,14 +120,14 @@ const styles = StyleSheet.create({
   pointOption: {
     backgroundColor: "#ddd",
     padding: 15,
-    borderRadius: 10,
+    borderRadius: 20,
     marginRight: 10,
     height: 200,
     display: "flex",
     alignItems: "flex-end",
     justifyContent: "flex-end",
   },
-  selectedOption: { backgroundColor: "#64A6F0", color: "#fff" },
+  selectedOption: { backgroundColor: "#4f7566", color: "#fff" },
   pointText: {
     fontSize: 14,
     fontWeight: "semibold",
@@ -141,7 +152,7 @@ const styles = StyleSheet.create({
   conditionText: { fontSize: 14, color: "#777", marginBottom: 5 },
   redeemButton: {
     marginTop: 30,
-    backgroundColor: "#64A6F0",
+    backgroundColor: "#4f7566",
     padding: 15,
     marginBottom: 100,
     borderRadius: 40,

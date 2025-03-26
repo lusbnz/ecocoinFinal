@@ -6,16 +6,17 @@ import {
   ImageBackground,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
   Image,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const plastics = [
   {
     id: "1",
     name: "Polyethylene Terephthalate (PET)",
     type: "PET",
-    description: "Commonly used for beverage bottles and food containers. It is lightweight, strong, and highly recyclable, making it the most widely used plastic in food and beverage packaging.",
+    description:
+      "Commonly used for beverage bottles and food containers. It is lightweight, strong, and highly recyclable, making it the most widely used plastic in food and beverage packaging.",
     image:
       "https://images.pexels.com/photos/30912294/pexels-photo-30912294/free-photo-of-thien-nga-tr-ng-thanh-th-n-l-t-tren-ao-s-ng-mu-sintra.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
@@ -23,7 +24,8 @@ const plastics = [
     id: "2",
     name: "High-Density Polyethylene (HDPE)",
     type: "HDPE",
-    description: "Used for milk jugs, shampoo bottles, and detergent containers. It is known for its strength and resistance to impact, making it ideal for products that require durability.",
+    description:
+      "Used for milk jugs, shampoo bottles, and detergent containers. It is known for its strength and resistance to impact, making it ideal for products that require durability.",
     image:
       "https://images.pexels.com/photos/19479799/pexels-photo-19479799/free-photo-of-canh-tay-dan-ba-hoa-d-ng.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
@@ -33,6 +35,17 @@ const PlasticDetailScreen = ({ route, navigation }) => {
   const { plastic } = route.params;
   return (
     <View style={styles.container}>
+      <View style={{ position: "absolute", top: 60, zIndex: 3, display: "flex", flexDirection: "row", marginBottom: 10 }}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{ flexDirection: "row" }}
+        >
+          <Ionicons name="chevron-back" size={18} color="white" />
+          <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5, color: "white" }}>
+            Quay lại
+          </Text>
+        </TouchableOpacity>
+      </View>
       <ImageBackground
         source={{ uri: plastic.image }}
         style={styles.headerImage}
@@ -68,19 +81,19 @@ const PlasticDetailScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
+  container: { flex: 1, paddingTop: 50, paddingBottom: 20, backgroundColor: "#fff" },
   headerImage: {
     width: "100%",
-    height: "50%",
+    height: "55%",
     justifyContent: "flex-end",
     position: "relative",
   },
   overlay: {
     position: "absolute",
-    top: 120,
+    top: 140,
     left: 20,
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 20,
   },
   tag: {
     fontSize: 12,
@@ -92,28 +105,27 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingTop: 5,
     paddingBottom: 5,
-    color: "#3D8ED4",
+    color: "white",
     textAlign: "center",
   },
   title: { fontSize: 18, fontWeight: "bold", color: "#fff" },
   contentContainer: {
     flex: 1,
-    paddingLeft: 20,
-    paddingRight: 20,
+    padding: 20,
     backgroundColor: "#fff",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
-    marginTop: -160,
-    height: 100,
+    marginTop: -210,
   },
   description: { fontSize: 16, color: "#333", marginBottom: 20 },
   card: {
     flex: 1,
     height: 180,
-    margin: 10,
+    marginVertical: 10,
+    marginLeft: 0,
+    marginRight: 20,
     backgroundColor: "#F3F3F3",
     borderRadius: 20,
     alignItems: "center",

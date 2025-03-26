@@ -61,7 +61,7 @@ const promoData = [
   },
 ];
 
-const MyCouponsScreen = ({ navigation }) => {
+const NotificationsScreen = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredData =
@@ -181,4 +181,4 @@ const MyCouponsScreen = ({ navigation }) => {
   );
 };
 
-export default MyCouponsScreen;
+export default NotificationsScreen;

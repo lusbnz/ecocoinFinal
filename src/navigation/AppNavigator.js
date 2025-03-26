@@ -17,6 +17,8 @@ import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Toast from "react-native-toast-message";
 import MyCouponsScreen from "../screens/promo/MyCouponsScreen";
+import QRScannerScreen from "../screens/qrscan/QRScannerScreen";
+import NotificationsScreen from "../screens/main/NotificationsScreen";
 
 enableScreens();
 
@@ -39,122 +41,22 @@ export default function AppNavigator() {
 
         <Stack.Screen name="Main" component={MainNavigator} />
 
-        <Stack.Screen
-          name="BannerDetail"
-          component={BannerDetailScreen}
-          options={({ navigation }) => ({
-            tabBarStyle: { display: "none" },
-            headerShown: true,
-            headerLeft: () => (
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={{ marginLeft: 20 }}
-              >
-                <Ionicons name="arrow-back" size={28} color="black" />
-              </TouchableOpacity>
-            ),
-            title: "Banner Detail",
-            headerStyle: {
-              backgroundColor: "#fff",
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-          })}
-        />
+        <Stack.Screen name="QRScan" component={QRScannerScreen} />
+        <Stack.Screen name="Notifications" component={NotificationsScreen} />
+
+        <Stack.Screen name="BannerDetail" component={BannerDetailScreen} />
         <Stack.Screen
           name="TransactionDetail"
           component={TransactionDetailScreen}
-          options={({ navigation }) => ({
-            tabBarStyle: { display: "none" },
-            headerShown: true,
-            gestureEnabled: true,
-            headerLeft: () => (
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={{ marginLeft: 20 }}
-              >
-                <Ionicons name="arrow-back" size={28} color="black" />
-              </TouchableOpacity>
-            ),
-            title: "Transaction Detail",
-            headerStyle: {
-              backgroundColor: "#fff",
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-          })}
         />
 
         <Stack.Screen
           name="PlasticIdentification"
           component={PlasticIdentificationScreen}
-          options={({ navigation }) => ({
-            tabBarStyle: { display: "none" },
-            headerShown: true,
-            gestureEnabled: true,
-            headerLeft: () => (
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={{ marginLeft: 20 }}
-              >
-                <Ionicons name="arrow-back" size={28} color="black" />
-              </TouchableOpacity>
-            ),
-            title: "Plasstic Identification",
-            headerStyle: {
-              backgroundColor: "#fff",
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-          })}
         />
-        <Stack.Screen
-          name="PlasticDetail"
-          component={PlasticDetailScreen}
-          options={({ navigation }) => ({
-            tabBarStyle: { display: "none" },
-            headerShown: true,
-            gestureEnabled: true,
-            headerLeft: () => (
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={{ marginLeft: 20 }}
-              >
-                <Ionicons name="arrow-back" size={28} color="black" />
-              </TouchableOpacity>
-            ),
-            title: "Plasstic Detail",
-            headerStyle: {
-              backgroundColor: "#fff",
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-          })}
-        />
+        <Stack.Screen name="PlasticDetail" component={PlasticDetailScreen} />
 
-        <Stack.Screen
-          name="MyCoupons"
-          component={MyCouponsScreen}
-          options={({ navigation }) => ({
-            tabBarStyle: { display: "none" },
-            headerShown: true,
-            gestureEnabled: true,
-            headerLeft: () => (
-              <TouchableOpacity
-                onPress={() => navigation.goBack()}
-                style={{ marginLeft: 20 }}
-              >
-                <Ionicons name="arrow-back" size={28} color="black" />
-              </TouchableOpacity>
-            ),
-            title: "My Coupons",
-            headerStyle: {
-              backgroundColor: "#fff",
-              elevation: 0,
-              shadowOpacity: 0,
-            },
-          })}
-        />
+        <Stack.Screen name="MyCoupons" component={MyCouponsScreen} />
       </Stack.Navigator>
       <Toast />
     </>

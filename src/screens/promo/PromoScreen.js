@@ -19,48 +19,35 @@ const promoData = [
   {
     id: "1",
     title: "Giảm 50% khi đặt món",
+    desc: "Nhận ngay ưu đãi giảm giá 50% cho tất cả các món ăn khi đặt hàng qua ứng dụng trong khung giờ vàng từ 12:00 - 14:00 và 18:00 - 20:00.",
     image:
       "https://images.pexels.com/photos/13003306/pexels-photo-13003306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
     id: "2",
     title: "Miễn phí giao hàng",
+    desc: "Đặt hàng ngay hôm nay và tận hưởng ưu đãi miễn phí giao hàng cho tất cả các đơn hàng từ 100.000đ trở lên, áp dụng trên toàn quốc.",
     image:
       "https://images.pexels.com/photos/13003306/pexels-photo-13003306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
     id: "3",
     title: "Giảm 20% cho đơn đầu tiên",
+    desc: "Lần đầu tiên đặt hàng? Nhập mã NEW20 để nhận ngay giảm giá 20% cho đơn hàng đầu tiên của bạn. Không giới hạn giá trị đơn hàng.",
     image:
       "https://images.pexels.com/photos/13003306/pexels-photo-13003306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
     id: "4",
-    title: "Giảm 10% cho đơn đầu tiên",
+    title: "Giảm 10% cho đơn hàng",
+    desc: "Khách hàng thân thiết sẽ nhận ngay mã giảm giá 10% cho đơn hàng tiếp theo sau khi hoàn tất một đơn hàng bất kỳ.",
     image:
       "https://images.pexels.com/photos/13003306/pexels-photo-13003306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
     id: "5",
-    title: "Giảm 10% cho đơn đầu tiên",
-    image:
-      "https://images.pexels.com/photos/13003306/pexels-photo-13003306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-  {
-    id: "6",
-    title: "Giảm 10% cho đơn đầu tiên",
-    image:
-      "https://images.pexels.com/photos/13003306/pexels-photo-13003306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-  {
-    id: "7",
-    title: "Giảm 10% cho đơn đầu tiên",
-    image:
-      "https://images.pexels.com/photos/13003306/pexels-photo-13003306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-  {
-    id: "8",
-    title: "Giảm 10% cho đơn đầu tiên",
+    title: "Ưu đãi 10% khi đặt combo",
+    desc: "Mua combo 2 món trở lên sẽ được giảm ngay 10%. Hãy thử ngay các set combo ngon miệng và tiết kiệm hơn!",
     image:
       "https://images.pexels.com/photos/13003306/pexels-photo-13003306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
@@ -107,9 +94,9 @@ export default function PromoScreen({ navigation }) {
         >
           <View
             style={{
-              width: 30,
-              height: 30,
-              backgroundColor: "#3D8ED4",
+              width: 40,
+              height: 40,
+              backgroundColor: "#4F7566",
               borderRadius: 100,
             }}
           />
@@ -124,9 +111,9 @@ export default function PromoScreen({ navigation }) {
         >
           <View
             style={{
-              width: 30,
-              height: 30,
-              backgroundColor: "#3D8ED4",
+              width: 40,
+              height: 40,
+              backgroundColor: "#4F7566",
               borderRadius: 100,
             }}
           />
@@ -141,24 +128,32 @@ export default function PromoScreen({ navigation }) {
         data={promoData}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <ImageBackground
-            style={styles.promoCard}
-            source={{ uri: item.image }}
-            imageStyle={{ borderRadius: 20 }}
+          <View
+            style={{
+              marginBottom: 20,
+              display: "flex",
+              flexDirection: "column",
+            }}
           >
-            <Text style={styles.promoText}>{item.title}</Text>
-            <TouchableOpacity
-              style={styles.ctaButton}
-              onPress={() => {
-                navigation.navigate("BannerDetail", {
-                  bannerId: item.id,
-                  imageUrl: item.image,
-                });
-              }}
+            <ImageBackground
+              style={styles.promoCard}
+              source={{ uri: item.image }}
+              imageStyle={{ borderRadius: 20 }}
             >
-              <Text style={styles.ctaText}>Thu thập</Text>
-            </TouchableOpacity>
-          </ImageBackground>
+              <Text style={styles.promoText}>{item.title}</Text>
+              <TouchableOpacity
+                style={styles.ctaButton}
+                onPress={() => {
+                  navigation.navigate("BannerDetail", {
+                    bannerId: item.id,
+                    imageUrl: item.image,
+                  });
+                }}
+              >
+                <Text style={styles.ctaText}>Thu thập</Text>
+              </TouchableOpacity>
+            </ImageBackground>
+          </View>
         )}
       />
     </ScrollView>
@@ -172,12 +167,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 40,
     paddingBottom: 60,
+    marginBottom: 80,
   },
   searchBar: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#f0f0f0",
-    borderRadius: 8,
+    borderRadius: 20,
     paddingHorizontal: 12,
     height: 40,
     marginVertical: 10,
@@ -188,7 +184,7 @@ const styles = StyleSheet.create({
   slideImage: {
     width: width - 32,
     height: 160,
-    borderRadius: 10,
+    borderRadius: 20,
     marginRight: 10,
   },
   tabContainer: {
@@ -202,14 +198,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     height: 60,
     backgroundColor: "#f0f0f0",
-    borderRadius: 8,
+    borderRadius: 20,
     marginHorizontal: 5,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
   },
-  tabText: { fontSize: 14, fontWeight: "500" },
+  tabText: { fontSize: 14, fontWeight: "bold" },
   tabDesc: { fontSize: 10, color: "#888" },
   promoCard: {
     flexDirection: "row",
@@ -218,16 +214,16 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     height: 160,
   },
-  promoText: { fontSize: 16, fontWeight: "bold", color: "white" },
+  promoText: { fontSize: 16, fontWeight: "800", color: "white" },
   ctaButton: {
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "white",
     paddingHorizontal: 16,
-    borderRadius: 10,
+    borderRadius: 20,
     height: 30,
     marginTop: 100,
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
   },
-  ctaText: { color: "white", fontWeight: "normal" },
+  ctaText: { color: "#4F7566", fontWeight: "normal" },
 });
