@@ -14,7 +14,6 @@ export default function CreatePasswordScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
 
-  // Điều kiện kiểm tra mật khẩu
   const isLengthValid = password.length >= 8;
   const hasNumber = /\d/.test(password);
   const hasNonLetter = /[^a-zA-Z0-9]/.test(password);
@@ -63,7 +62,7 @@ export default function CreatePasswordScreen({ navigation }) {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "#248A3D",
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#3D8ED4",
+    color: "#248A3D",
     textAlign: "left",
   },
   subtitle: {
@@ -112,14 +111,14 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     fontSize: 12,
     fontWeight: "bold",
-    color: "#3D8ED4",
+    color: "#248A3D",
   },
   valid: {
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "#248A3D",
     color: "white",
   },
   button: {
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "#248A3D",
     padding: 15,
     borderRadius: 100,
     alignItems: "center",

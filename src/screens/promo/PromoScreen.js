@@ -96,7 +96,7 @@ export default function PromoScreen({ navigation }) {
             style={{
               width: 40,
               height: 40,
-              backgroundColor: "#4F7566",
+              backgroundColor: "#248A3D",
               borderRadius: 100,
             }}
           />
@@ -113,7 +113,7 @@ export default function PromoScreen({ navigation }) {
             style={{
               width: 40,
               height: 40,
-              backgroundColor: "#4F7566",
+              backgroundColor: "#248A3D",
               borderRadius: 100,
             }}
           />
@@ -216,14 +216,14 @@ const styles = StyleSheet.create({
   },
   promoText: { fontSize: 16, fontWeight: "800", color: "white" },
   ctaButton: {
-    backgroundColor: "white",
+    backgroundColor: "#248A3D",
     paddingHorizontal: 16,
     borderRadius: 20,
-    height: 30,
-    marginTop: 100,
+    height: 40,
+    marginTop: 90,
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
   },
-  ctaText: { color: "#4F7566", fontWeight: "normal" },
+  ctaText: { color: "white", fontWeight: "bold" },
 });

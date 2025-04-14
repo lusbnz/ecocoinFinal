@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "flex-end",
   },
-  selectedOption: { backgroundColor: "#4f7566", color: "#fff" },
+  selectedOption: { backgroundColor: "#248A3D", color: "#fff" },
   pointText: {
     fontSize: 14,
     fontWeight: "semibold",
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   conditionText: { fontSize: 14, color: "#777", marginBottom: 5 },
   redeemButton: {
     marginTop: 30,
-    backgroundColor: "#4f7566",
+    backgroundColor: "#248A3D",
     padding: 15,
     marginBottom: 100,
     borderRadius: 40,

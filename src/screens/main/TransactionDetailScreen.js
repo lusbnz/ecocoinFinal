@@ -124,17 +124,17 @@ const styles = StyleSheet.create({
   buttonContainer: { flexDirection: "row", marginTop: 20 },
   saveButton: {
     borderWidth: 1,
-    borderColor: "#4f7566",
+    borderColor: "#248A3D",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 30,
     marginRight: 10,
     flex: 1,
     alignItems: "center",
-    color: "#4f7566",
+    color: "#248A3D",
   },
   shareButton: {
-    backgroundColor: "#4f7566",
+    backgroundColor: "#248A3D",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 30,
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   buttonText: { fontSize: 16, fontWeight: "bold", color: "#fff" },
-  buttonTextPrimary: { fontSize: 16, fontWeight: "bold", color: "#4f7566" },
+  buttonTextPrimary: { fontSize: 16, fontWeight: "bold", color: "#248A3D" },
 });
 
 export default TransactionDetailScreen;

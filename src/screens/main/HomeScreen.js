@@ -83,7 +83,7 @@ export default function HomeScreen({ navigation }) {
 
   return loading ? (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <ActivityIndicator size="small" color="#4F7566" />
+      <ActivityIndicator size="small" color="#248A3D" />
     </View>
   ) : (
     <ScrollView style={styles.container}>
@@ -94,7 +94,7 @@ export default function HomeScreen({ navigation }) {
         </View>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
           <TouchableOpacity onPress={() => navigation.navigate("QRScan")}>
-            <Ionicons name="scan" size={24} color="#4F7566" />
+            <Ionicons name="scan" size={24} color="#248A3D" />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate("Notifications")}
@@ -114,7 +114,7 @@ export default function HomeScreen({ navigation }) {
               <Ionicons
                 name="notifications-outline"
                 size={24}
-                color="#4F7566"
+                color="#248A3D"
               />
             </Animated.View>
           </TouchableOpacity>
@@ -137,6 +137,40 @@ export default function HomeScreen({ navigation }) {
         ))}
       </ScrollView>
 
+      <View
+        style={{
+          height: 150,
+          backgroundColor: "#248A3D",
+          margin: "20",
+          marginBottom: "0",
+          padding: "10",
+          borderRadius: 20,
+          flex: '1',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '5'
+        }}
+      >
+        <Text
+          style={{
+            color: "white",
+            fontSize: "24",
+            fontWeight: "600",
+          }}
+        >
+          Unlock Your Special Offer
+        </Text>
+        <Text
+          style={{
+            color: "white",
+            fontSize: "12",
+            fontWeight: "400",
+          }}
+        >
+          Your perfect deals, handlepicked!
+        </Text>
+      </View>
+
       <View style={styles.eventContainer}>
         <View
           style={{
@@ -148,7 +182,7 @@ export default function HomeScreen({ navigation }) {
         >
           <Text style={styles.eventTitle}>Sự kiện đang diễn ra</Text>
           <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
-            <Ionicons name="chevron-forward" size={18} color="#888" />
+            <Text>See All</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
@@ -177,7 +211,7 @@ export default function HomeScreen({ navigation }) {
         >
           <Text style={styles.eventTitle}>Có thể bạn quan tâm</Text>
           <TouchableOpacity onPress={() => navigation.navigate("Promo")}>
-            <Ionicons name="chevron-forward" size={18} color="#888" />
+            <Text>See All</Text>
           </TouchableOpacity>
         </View>
 
@@ -269,7 +303,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   greeting: { fontSize: 18, fontWeight: "bold" },
-  name: { fontSize: 20, fontWeight: "bold", color: "#4F7566" },
+  name: { fontSize: 20, fontWeight: "bold", color: "#248A3D" },
 
   masonry: {
     marginHorizontal: 10,
@@ -317,7 +351,6 @@ const styles = StyleSheet.create({
   eventTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    marginTop: 10,
     color: "#222524",
   },
   viewMore: {
@@ -342,14 +375,14 @@ const styles = StyleSheet.create({
   },
   promoText: { fontSize: 16, fontWeight: "800", color: "#FFFFFF" },
   ctaButton: {
-    backgroundColor: "white",
+    backgroundColor: "#248A3D",
     paddingHorizontal: 16,
     borderRadius: 20,
-    height: 30,
-    marginTop: 100,
+    height: 40,
+    marginTop: 90,
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
   },
-  ctaText: { color: "#4F7566", fontWeight: "normal" },
+  ctaText: { color: "white", fontWeight: "bold" },
 });

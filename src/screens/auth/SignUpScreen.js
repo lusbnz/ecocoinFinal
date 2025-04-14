@@ -1,3 +1,4 @@
+import { setStatusBarTranslucent } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   View,
@@ -14,7 +15,7 @@ const { height } = Dimensions.get("window");
 export default function SignupScreen({ navigation }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [agree, setAgree] = useState(false);
+  const [agree, setAgree] = useState(setStatusBarTranslucent);
 
   return (
     <View style={styles.backgroundContainer}>
@@ -42,7 +43,7 @@ export default function SignupScreen({ navigation }) {
             <Checkbox
               status={agree ? "checked" : "unchecked"}
               onPress={() => setAgree(!agree)}
-              color="#64A6F0"
+              color="#248A3D"
               uncheckedColor="#6D6D6D"
             />
           </View>
@@ -79,7 +80,7 @@ export default function SignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "#248A3D",
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#3D8ED4",
+    color: "#248A3D",
     textAlign: "left",
   },
   subtitle: {
@@ -126,11 +127,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   link: {
-    color: "#64A6F0",
+    color: "#248A3D",
     fontWeight: "bold",
   },
   button: {
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "#248A3D",
     padding: 15,
     borderRadius: 100,
     alignItems: "center",

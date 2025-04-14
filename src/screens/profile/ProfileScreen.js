@@ -68,7 +68,40 @@ export default function ProfileScreen({ navigation }) {
       </View>
       <View style={styles.pointsContainer}>
         <Text style={styles.pointsText}>873 Điểm tích lũy</Text>
-        <MaterialIcons name="monetization-on" size={24} color="#4F7566" />
+        <MaterialIcons name="monetization-on" size={24} color="#248A3D" />
+      </View>
+      <View
+        style={{
+          height: 150,
+          backgroundColor: "#248A3D",
+          margin: "20",
+          marginBottom: "0",
+          padding: "10",
+          borderRadius: 20,
+          flex: '1',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '5'
+        }}
+      >
+        <Text
+          style={{
+            color: "white",
+            fontSize: "24",
+            fontWeight: "600",
+          }}
+        >
+          A Special Gift For You!
+        </Text>
+        <Text
+          style={{
+            color: "white",
+            fontSize: "12",
+            fontWeight: "400",
+          }}
+        >
+          23:59:43
+        </Text>
       </View>
       <View style={styles.detailsContainer}>
         <View style={styles.detailsHeader}>
@@ -186,7 +219,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  pointsText: { fontSize: 18, fontWeight: "bold", color: "#4F7566" },
+  pointsText: { fontSize: 18, fontWeight: "bold", color: "#248A3D" },
   detailsContainer: {
     paddingHorizontal: 20,
     paddingVertical: 15,
@@ -239,7 +272,7 @@ const styles = StyleSheet.create({
   logoutButton: {
     padding: 10,
     width: "40%",
-    backgroundColor: "#4F7566",
+    backgroundColor: "#248A3D",
     borderRadius: 20,
     alignItems: "center",
     marginTop: 50,

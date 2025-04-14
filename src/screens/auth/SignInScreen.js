@@ -50,7 +50,7 @@ export default function SignInScreen({ navigation }) {
 
         <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
           <Text style={styles.signupText}>
-            Dont have an account yet? <Text style={styles.link}>SignUp</Text>
+            Dont have an account yet? <Text style={styles.link}>Sign Up</Text>
           </Text>
         </TouchableOpacity>
       </View>
@@ -61,7 +61,7 @@ export default function SignInScreen({ navigation }) {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "#248A3D",
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#3D8ED4",
+    color: "#248A3D",
     textAlign: "left",
   },
   subtitle: {
@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   link: {
-    color: "#64A6F0",
+    color: "#248A3D",
     fontWeight: "bold",
   },
   button: {
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "#248A3D",
     padding: 15,
     borderRadius: 100,
     alignItems: "center",

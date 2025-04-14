@@ -230,10 +230,10 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   map: { flex: 1 },
   marker: {
-    backgroundColor: "#4f5766",
+    backgroundColor: "#248A3D",
     paddingVertical: 4,
     paddingHorizontal: 8,
-    borderRadius: 8,
+    borderRadius: 20,
   },
   status: { color: "#fff", fontWeight: "bold" },
   card: {
@@ -286,7 +286,6 @@ const styles = StyleSheet.create({
   checkinTime: { fontSize: 12, color: "gray", marginTop: 2 },
   checkinNote: { fontSize: 14, marginTop: 4 },
   closeButton: {
-    backgroundColor: "#eee",
     width: 24,
     height: 24,
     borderRadius: 12,

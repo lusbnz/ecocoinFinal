@@ -16,52 +16,60 @@ const promoData = [
     category: "Food",
     title: "Giảm 20% tại KFC",
     description: "Sử dụng mã này để được giảm 20%...",
+    time: "Just Now",
   },
   {
     id: "2",
     category: "Transport",
     title: "Giảm 30% Grab",
     description: "Đi Grab giảm 30% khi dùng mã này...",
+    time: "Just Now",
   },
   {
     id: "3",
     category: "Card",
     title: "Tích điểm VinID",
     description: "Nhận 100 điểm VinID với mã này...",
+    time: "1h ago",
   },
   {
     id: "4",
     category: "Food",
     title: "Ưu đãi McDonald's",
     description: "Mua 1 tặng 1 burger hấp dẫn...",
+    time: "1h ago",
   },
   {
     id: "5",
     category: "Transport",
     title: "Giảm 20% Grab",
     description: "Đi Grab giảm 20% khi dùng mã này...",
+    time: "1h ago",
   },
   {
     id: "6",
     category: "Card",
     title: "Tích điểm ShopeePay",
     description: "Nhận 50 điểm ShopeePay với mã này...",
+    time: "1h ago",
   },
   {
     id: "7",
     category: "Food",
     title: "Ưu đãi Burger King",
     description: "Mua 1 tặng 1 burger hấp dẫn...",
+    time: "1h ago",
   },
   {
     id: "8",
     category: "Transport",
     title: "Giảm 10% Grab",
     description: "Đi Grab giảm 10% khi dùng mã này...",
+    time: "1h ago",
   },
 ];
 
-const NotificationsScreen = ({ navigation }) => {
+const Notification = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredData =
@@ -72,7 +80,6 @@ const NotificationsScreen = ({ navigation }) => {
   return (
     <View
       style={{
-        backgroundColor: "#F5F5F5",
         padding: 15,
         paddingTop: 50,
         display: "flex",
@@ -81,7 +88,10 @@ const NotificationsScreen = ({ navigation }) => {
       }}
     >
       <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={{ flexDirection: "row" }}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{ flexDirection: "row" }}
+        >
           <Ionicons name="chevron-back" size={18} color="#888" />
           <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5 }}>
             Quay lại
@@ -104,7 +114,7 @@ const NotificationsScreen = ({ navigation }) => {
             onPress={() => setSelectedCategory(category)}
             style={{
               backgroundColor:
-                selectedCategory === category ? "#4F7566" : "#E5E5E5",
+                selectedCategory === category ? "#248A3D" : "#E5E5E5",
               paddingHorizontal: 15,
               borderRadius: 20,
               marginRight: 10,
@@ -131,54 +141,83 @@ const NotificationsScreen = ({ navigation }) => {
         data={filteredData}
         keyExtractor={(item) => item.id}
         style={{ marginTop: 0 }}
-        renderItem={({ item }) => (
-          <View
-            style={{
-              backgroundColor: "#fff",
-              padding: 15,
-              borderRadius: 10,
-              marginBottom: 10,
-              flexDirection: "row",
-              alignItems: "flex-start",
-            }}
-          >
+        renderItem={({ item, index }) => (
+          <>
             <View
               style={{
-                width: 40,
-                height: 40,
-                backgroundColor: "#ccc",
-                borderRadius: 20,
-                marginRight: 10,
+                backgroundColor: "#fff",
+                padding: 15,
+                borderRadius: 10,
+                marginBottom: 10,
+                flexDirection: "row",
+                alignItems: "flex-start",
               }}
-            />
-            <View style={{ flex: 1 }}>
-              <Text style={{ fontSize: 12, color: "#888", marginBottom: 5 }}>
-                {item.category}
-              </Text>
-              <Text
+            >
+              <View
                 style={{
-                  fontSize: 16,
-                  fontWeight: "bold",
-                  color: "#212524",
-                  marginBottom: 5,
+                  width: 40,
+                  height: 40,
+                  backgroundColor: "#e5e5e5",
+                  borderRadius: 10,
+                  marginRight: 10,
+                }}
+              />
+              <View style={{ flex: 1 }}>
+                <Text style={{ fontSize: 12, color: "#888", marginBottom: 5 }}>
+                  {item.category}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "bold",
+                    color: "#212524",
+                    marginBottom: 5,
+                  }}
+                >
+                  {item.title}
+                </Text>
+                <Text style={{ fontSize: 14, color: "#666" }}>
+                  {item.description}
+                </Text>
+              </View>
+              <View
+                style={{
+                  backgroundColor: "#e5e5e5",
+                  borderRadius: 10,
+                  paddingLeft: 10,
+                  paddingRight: 10,
+                  paddingBottom: 2,
+                  paddingTop: 2,
                 }}
               >
-                {item.title}
-              </Text>
-              <Text style={{ fontSize: 14, color: "#666" }}>
-                {item.description}
-              </Text>
+                <Text
+                  style={{
+                    color: "#212529",
+                    fontSize: "12",
+                    fontWeight: "normal",
+                  }}
+                >
+                  {item.time}
+                </Text>
+              </View>
             </View>
-            <TouchableOpacity>
-              <Text style={{ fontSize: 20, color: "#888", marginTop: 5 }}>
-                ⋮
+
+            {index === 4 && (
+              <Text
+                style={{
+                  marginBottom: "10",
+                  fontSize: "18",
+                  fontWeight: "600",
+                }}
+              >
+                Previous
               </Text>
-            </TouchableOpacity>
-          </View>
+            )}
+          </>
         )}
       />
     </View>
   );
 };
 
-export default NotificationsScreen;
+export default Notification;

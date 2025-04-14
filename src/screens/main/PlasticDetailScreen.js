@@ -18,7 +18,7 @@ const plastics = [
     description:
       "Commonly used for beverage bottles and food containers. It is lightweight, strong, and highly recyclable, making it the most widely used plastic in food and beverage packaging.",
     image:
-      "https://images.pexels.com/photos/30912294/pexels-photo-30912294/free-photo-of-thien-nga-tr-ng-thanh-th-n-l-t-tren-ao-s-ng-mu-sintra.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://d1ymz67w5raq8g.cloudfront.net/Pictures/2000xAny/2/4/5/114245_shutterstock_95088004.jpg",
   },
   {
     id: "2",
@@ -27,7 +27,7 @@ const plastics = [
     description:
       "Used for milk jugs, shampoo bottles, and detergent containers. It is known for its strength and resistance to impact, making it ideal for products that require durability.",
     image:
-      "https://images.pexels.com/photos/19479799/pexels-photo-19479799/free-photo-of-canh-tay-dan-ba-hoa-d-ng.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://everydayrecycler.com/wp-content/uploads/2020/02/plastic-number-2-main.jpg",
   },
 ];
 
@@ -40,8 +40,8 @@ const PlasticDetailScreen = ({ route, navigation }) => {
           onPress={() => navigation.goBack()}
           style={{ flexDirection: "row" }}
         >
-          <Ionicons name="chevron-back" size={18} color="white" />
-          <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5, color: "white" }}>
+          <Ionicons name="chevron-back" size={18} color="black" />
+          <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5, color: "black" }}>
             Quay lại
           </Text>
         </TouchableOpacity>

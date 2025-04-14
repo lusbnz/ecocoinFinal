@@ -17,7 +17,7 @@ const plastics = [
     description:
       "Commonly used for beverage bottles and food containers. It is lightweight, strong, and highly recyclable, making it the most widely used plastic in food and beverage packaging.",
     image:
-      "https://images.pexels.com/photos/30912294/pexels-photo-30912294/free-photo-of-thien-nga-tr-ng-thanh-th-n-l-t-tren-ao-s-ng-mu-sintra.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://d1ymz67w5raq8g.cloudfront.net/Pictures/2000xAny/2/4/5/114245_shutterstock_95088004.jpg",
   },
   {
     id: "2",
@@ -26,7 +26,7 @@ const plastics = [
     description:
       "Used for milk jugs, shampoo bottles, and detergent containers. It is known for its strength and resistance to impact, making it ideal for products that require durability.",
     image:
-      "https://images.pexels.com/photos/19479799/pexels-photo-19479799/free-photo-of-canh-tay-dan-ba-hoa-d-ng.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://everydayrecycler.com/wp-content/uploads/2020/02/plastic-number-2-main.jpg",
   },
   {
     id: "3",
@@ -35,7 +35,7 @@ const plastics = [
     description:
       "A versatile plastic used in pipes, medical equipment, and window frames. While durable and weather-resistant, PVC contains harmful chemicals that make it difficult to recycle.",
     image:
-      "https://images.pexels.com/photos/31077659/pexels-photo-31077659/free-photo-of-thi-t-l-p-may-tinh-d-ban-m-cung-v-i-den-va-tach-ca-phe.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://omnexus.specialchem.com/_/media/selection-guides/omnexus/polymer-profiles/polyvinylchloride/pvc-pipes-1.jpg",
   },
   {
     id: "4",
@@ -44,7 +44,7 @@ const plastics = [
     description:
       "Flexible and lightweight, LDPE is commonly used for plastic bags, squeezable bottles, and food wraps. It has a lower recycling rate compared to other plastics but is still widely used.",
     image:
-      "https://images.pexels.com/photos/28579173/pexels-photo-28579173.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://waste4change.com/blog/wp-content/uploads/plastic-bags.jpg",
   },
   {
     id: "5",
@@ -53,7 +53,7 @@ const plastics = [
     description:
       "A tough and heat-resistant plastic often used in food containers, bottle caps, and straws. It has a high melting point, making it ideal for hot food storage.",
     image:
-      "https://images.pexels.com/photos/8869963/pexels-photo-8869963.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTroQZwfdf7E4ShTxUPSXIGpZICynaqw57aTw&s",
   },
   {
     id: "6",
@@ -62,7 +62,7 @@ const plastics = [
     description:
       "Often found in disposable cups, food containers, and packaging materials. While lightweight and cheap, PS is not biodegradable and is difficult to recycle.",
     image:
-      "https://images.pexels.com/photos/28377941/pexels-photo-28377941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      "https://image.made-in-china.com/202f0j00MByVTefgYsRQ/EPS-Polystyrene-Foam-Block-Styrofoam-Geofoam-Thermal-Insulation-Board.webp",
   },
 ];
 
