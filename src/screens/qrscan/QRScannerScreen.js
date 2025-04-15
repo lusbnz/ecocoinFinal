@@ -31,7 +31,7 @@ export default function QRScannerScreen() {
         }}
         flashMode={flash}
       >
-        <Text style={styles.scanText}>Find a code to scan</Text>
+        <Text style={styles.scanText}>Tìm QR Code để quét</Text>
 
         <View style={styles.overlay}>
           <View style={styles.qrFrame}>

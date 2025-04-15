@@ -17,8 +17,8 @@ export default function SignInScreen({ navigation }) {
   return (
     <View style={styles.backgroundContainer}>
       <View style={styles.formContainer}>
-        <Text style={styles.title}>Login</Text>
-        <Text style={styles.subtitle}>Please enter your details to login</Text>
+        <Text style={styles.title}>Đăng nhập</Text>
+        <Text style={styles.subtitle}> Vui lòng nhập thông tin của bạn để đăng nhập</Text>
         <TextInput
           style={styles.input}
           placeholder="Số điện thoại"
@@ -38,10 +38,10 @@ export default function SignInScreen({ navigation }) {
           style={[styles.button, { opacity: 1 }]}
           onPress={() => navigation.navigate("Main")}
         >
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Đăng nhập</Text>
         </TouchableOpacity>
 
-        <Text style={styles.orText}>or login with</Text>
+        <Text style={styles.orText}>hoặc đăng nhập với</Text>
         <View style={styles.socialButtons}>
           <View style={styles.socialButton} />
           <View style={styles.socialButton} />
@@ -50,7 +50,7 @@ export default function SignInScreen({ navigation }) {
 
         <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
           <Text style={styles.signupText}>
-            Dont have an account yet? <Text style={styles.link}>Sign Up</Text>
+            Chưa có tài khoản? <Text style={styles.link}>Đăng ký</Text>
           </Text>
         </TouchableOpacity>
       </View>
@@ -61,7 +61,7 @@ export default function SignInScreen({ navigation }) {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#248A3D",
+    color: "#00623A",
     textAlign: "left",
   },
   subtitle: {
@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   link: {
-    color: "#248A3D",
+    color: "#00623A",
     fontWeight: "bold",
   },
   button: {
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     padding: 15,
     borderRadius: 100,
     alignItems: "center",

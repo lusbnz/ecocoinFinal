@@ -20,7 +20,7 @@ const IntroduceScreen = ({ navigation }) => {
       loop={false}
       showsPagination={true}
       dotColor="#ddd"
-      activeDotColor="#3D8ED4"
+      activeDotColor="#00623a"
     >
       <View style={styles.slide}>
         <Image
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 20,
   },
-  highlight: { color: "#3D8ED4" },
+  highlight: { color: "#00623a" },
   description: {
     fontSize: 14,
     textAlign: "center",
@@ -144,15 +144,15 @@ const styles = StyleSheet.create({
   buttonContainer: { flexDirection: "row", marginTop: 30 },
   skipButton: {
     borderWidth: 1,
-    borderColor: "#3D8ED4",
+    borderColor: "#00623a",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 20,
     marginRight: 15,
   },
-  skipText: { color: "#3D8ED4", fontWeight: "bold" },
+  skipText: { color: "#00623a", fontWeight: "bold" },
   registerButton: {
-    backgroundColor: "#3D8ED4",
+    backgroundColor: "#00623a",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 20,

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  ImageBackground,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ActivityIndicator } from "react-native-paper";
@@ -27,7 +28,7 @@ const BannerDetailScreen = ({ route, navigation }) => {
   const banner = {
     id: bannerId,
     image: imageUrl,
-    description: "Description",
+    description: "Đây là mô tả",
     detail: "Grab là một công ty công nghệ cung cấp dịch vụ vận chuyển...",
     conditions: ["Sở hữu thẻ thành viên bạc", "Thanh toán bằng tiền mặt"],
     pointOptions: [
@@ -44,16 +45,41 @@ const BannerDetailScreen = ({ route, navigation }) => {
     </View>
   ) : (
     <ScrollView style={styles.container}>
-       <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 10,
+        }}
+      >
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={{ flexDirection: "row" }}
+          style={{
+            backgroundColor: "#ffffff",
+            borderRadius: 100,
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 12,
+            width: 40,
+            height: 40,
+          }}
         >
-          <Ionicons name="chevron-back" size={18} color="#888" />
-          <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5 }}>
-            Quay lại
-          </Text>
+          <Ionicons name="chevron-back" size={16} color="#00623A" />
         </TouchableOpacity>
+
+        <Text
+          style={{
+            marginLeft: -32,
+            fontWeight: "bold",
+            fontSize: "16",
+            fontFamily: "Inter",
+          }}
+        >
+          Thông tin Voucher
+        </Text>
+        <View></View>
       </View>
       <Image source={{ uri: banner.image }} style={styles.bannerImage} />
       <Text style={styles.description}>{banner.description}</Text>
@@ -65,16 +91,24 @@ const BannerDetailScreen = ({ route, navigation }) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => setSelectedPoint(item.id)}
-            style={styles.pointOption}
           >
-            <Text
-              style={[
-                styles.pointText,
-                selectedPoint === item.id && styles.selectedOption,
-              ]}
+            <ImageBackground
+              source={{
+                uri: "https://images.pexels.com/photos/802221/pexels-photo-802221.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+              }}
+              resizeMode="cover"
+              style={styles.pointOption}
+              imageStyle={{ borderRadius: 12 }}
             >
-              {item.point} Point
-            </Text>
+              <Text
+                style={[
+                  styles.pointText,
+                  selectedPoint === item.id && styles.selectedOption,
+                ]}
+              >
+                {item.point} Điểm
+              </Text>
+            </ImageBackground>
           </TouchableOpacity>
         )}
         showsHorizontalScrollIndicator={false}
@@ -104,7 +138,7 @@ const BannerDetailScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#fff", paddingTop: 50, },
+  container: { flex: 1, padding: 20, backgroundColor: "#fff", paddingTop: 50 },
   bannerImage: {
     width: "100%",
     height: 150,
@@ -127,7 +161,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "flex-end",
   },
-  selectedOption: { backgroundColor: "#248A3D", color: "#fff" },
+  selectedOption: { backgroundColor: "#00623A", color: "#fff" },
   pointText: {
     fontSize: 14,
     fontWeight: "semibold",
@@ -152,7 +186,7 @@ const styles = StyleSheet.create({
   conditionText: { fontSize: 14, color: "#777", marginBottom: 5 },
   redeemButton: {
     marginTop: 30,
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     padding: 15,
     marginBottom: 100,
     borderRadius: 40,

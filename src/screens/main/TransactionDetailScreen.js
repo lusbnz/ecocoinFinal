@@ -27,16 +27,41 @@ const TransactionDetailScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={{ display: "flex", flexDirection: "row", marginBottom: 10 }}>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 10,
+        }}
+      >
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={{ flexDirection: "row" }}
+          style={{
+            backgroundColor: "#ffffff",
+            borderRadius: 100,
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 12,
+            width: 40,
+            height: 40,
+          }}
         >
-          <Ionicons name="chevron-back" size={18} color="#888" />
-          <Text style={{ fontSize: 16, fontWeight: "bold", marginLeft: 5 }}>
-            Quay lại
-          </Text>
+          <Ionicons name="chevron-back" size={16} color="#00623A" />
         </TouchableOpacity>
+
+        <Text
+          style={{
+            marginLeft: -32,
+            fontWeight: "bold",
+            fontSize: "16",
+            fontFamily: "Inter",
+          }}
+        >
+          Transaction Detail
+        </Text>
+        <View></View>
       </View>
       <Image source={{ uri: banner.image }} style={styles.bannerImage} />
       <Text style={styles.description}>{banner.description}</Text>
@@ -75,7 +100,13 @@ const TransactionDetailScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingHorizontal: 20, backgroundColor: "#fff", paddingTop: 50, paddingBottom: 20 },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    backgroundColor: "#fff",
+    paddingTop: 50,
+    paddingBottom: 20,
+  },
   bannerImage: {
     width: "100%",
     height: 150,
@@ -124,17 +155,17 @@ const styles = StyleSheet.create({
   buttonContainer: { flexDirection: "row", marginTop: 20 },
   saveButton: {
     borderWidth: 1,
-    borderColor: "#248A3D",
+    borderColor: "#00623A",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 30,
     marginRight: 10,
     flex: 1,
     alignItems: "center",
-    color: "#248A3D",
+    color: "#00623A",
   },
   shareButton: {
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     paddingVertical: 10,
     paddingHorizontal: 30,
     borderRadius: 30,
@@ -143,7 +174,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   buttonText: { fontSize: 16, fontWeight: "bold", color: "#fff" },
-  buttonTextPrimary: { fontSize: 16, fontWeight: "bold", color: "#248A3D" },
+  buttonTextPrimary: { fontSize: 16, fontWeight: "bold", color: "#00623A" },
 });
 
 export default TransactionDetailScreen;

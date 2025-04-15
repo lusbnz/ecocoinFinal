@@ -2,24 +2,24 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
   Dimensions,
   Linking,
   Platform,
+  ScrollView,
 } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import * as Location from 'expo-location';
+import * as Location from "expo-location";
 import { Ionicons } from "@expo/vector-icons";
+import CheckinBlock from "../../component/CheckinBlock";
 
 const { width } = Dimensions.get("window");
 
 const stations = [
   {
     id: "1",
-    name: "Cầu Giấy Station",
+    name: "Trạm Cầu Giấy",
     address: "Số 2, Lê Văn Thiêm, Thanh Xuân, Hà Nội",
     latitude: 21.0285,
     longitude: 105.7823,
@@ -46,11 +46,11 @@ const stations = [
   },
   {
     id: "2",
-    name: "Hoàn Kiếm Station",
+    name: "Trạm Hoàn Kiếm",
     address: "34 Tràng Tiền, Hoàn Kiếm, Hà Nội",
     latitude: 21.0285,
     longitude: 105.8542,
-    status: "Empty",
+    status: "Trống",
     exchanges: 22,
     checkins: [
       {
@@ -65,7 +65,7 @@ const stations = [
   },
   {
     id: "3",
-    name: "Đống Đa Station",
+    name: "Trạm Đống Đa",
     address: "Ngõ 82, Chùa Láng, Đống Đa, Hà Nội",
     latitude: 21.0188,
     longitude: 105.8295,
@@ -101,8 +101,8 @@ const MapScreen = () => {
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
         return;
       }
 
@@ -111,40 +111,34 @@ const MapScreen = () => {
     })();
   }, []);
 
-  const renderCheckinItem = ({ item }) => (
-    <View style={styles.checkinItem}>
-      <Image source={{ uri: item.image }} style={styles.checkinImage} />
-      <View style={styles.checkinContent}>
-        <Text style={styles.checkinUser}>{item.user}</Text>
-        <Text style={styles.checkinTime}>{item.time}</Text>
-        <Text style={styles.checkinNote}>{item.note}</Text>
-      </View>
-    </View>
-  );
-
   const goToMyLocation = () => {
     if (userLocation && mapRef.current) {
-      mapRef.current.animateToRegion({
-        latitude: userLocation.latitude,
-        longitude: userLocation.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      }, 1000);
+      mapRef.current.animateToRegion(
+        {
+          latitude: userLocation.latitude,
+          longitude: userLocation.longitude,
+          latitudeDelta: 0.01,
+          longitudeDelta: 0.01,
+        },
+        1000
+      );
     }
   };
 
   const openDirections = () => {
     if (!selectedStation) return;
-    
+
     const destination = `${selectedStation.latitude},${selectedStation.longitude}`;
     const url = Platform.select({
       ios: `maps://app?saddr=Current%20Location&daddr=${destination}`,
-      android: `google.navigation:q=${destination}`
+      android: `google.navigation:q=${destination}`,
     });
-    
-    Linking.openURL(url).catch(err => {
-      console.error('An error occurred', err);
-      Linking.openURL(`https://www.google.com/maps/dir/?api=1&destination=${destination}`);
+
+    Linking.openURL(url).catch((err) => {
+      console.error("An error occurred", err);
+      Linking.openURL(
+        `https://www.google.com/maps/dir/?api=1&destination=${destination}`
+      );
     });
   };
 
@@ -178,48 +172,69 @@ const MapScreen = () => {
         ))}
       </MapView>
 
-      <TouchableOpacity style={styles.myLocationButton} onPress={goToMyLocation}>
-        <Ionicons name="locate" size={24} color="#4e8d54" />
+      <TouchableOpacity
+        style={[
+          styles.myLocationButton,
+          {
+            backgroundColor: "#ffffff",
+            borderRadius: 100,
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 12,
+            width: 40,
+            height: 40,
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 1 },
+            shadowOpacity: 0.1,
+            shadowRadius: 1,
+            elevation: 3,
+          },
+        ]}
+        onPress={goToMyLocation}
+      >
+        <Ionicons name="locate" size={16} color="#00623A" />
       </TouchableOpacity>
 
       {selectedStation && (
         <View style={styles.card}>
-          <View style={styles.cardInfo}>
-            <Text style={styles.cardTitle}>{selectedStation.name}</Text>
-            <Text style={styles.cardAddress}>{selectedStation.address}</Text>
-            <Text style={styles.cardDetail}>
-              Tình trạng: {selectedStation.status}
-            </Text>
-            <Text style={styles.cardDetail}>
-              Số lượt quy đổi trong ngày: {selectedStation.exchanges}
-            </Text>
-            
-            <TouchableOpacity style={styles.directionsButton} onPress={openDirections}>
-              <Ionicons name="navigate" size={20} color="white" />
-              <Text style={styles.directionsButtonText}>Chỉ đường</Text>
-            </TouchableOpacity>
-            
-            <Text style={styles.checkinTitle}>Lịch sử Check-in:</Text>
-          </View>
-
-          <FlatList
-            data={selectedStation.checkins}
-            keyExtractor={(item) => item.id}
-            renderItem={renderCheckinItem}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.checkinList}
-            snapToInterval={width - 80}
-            decelerationRate="fast"
-            snapToAlignment="center"
-          />
-
           <TouchableOpacity
             style={styles.closeButton}
             onPress={() => setSelectedStation(null)}
           >
             <Text style={styles.closeText}>✕</Text>
           </TouchableOpacity>
+          <View style={styles.cardInfo}>
+            <Text style={styles.cardTitle}>{selectedStation.name}</Text>
+            <Text style={styles.cardAddress}>{selectedStation.address}</Text>
+            <Text style={styles.cardDetail}>
+              <Text style={{ fontWeight: "bold" }}>Tình trạng: </Text>
+              {selectedStation.status}
+            </Text>
+
+            <Text style={styles.cardDetail}>
+              <Text style={{ fontWeight: "bold" }}>
+                Số lượt quy đổi trong ngày:{" "}
+              </Text>
+              {selectedStation.exchanges}
+            </Text>
+
+            <TouchableOpacity
+              style={styles.directionsButton}
+              onPress={openDirections}
+            >
+              <Ionicons name="navigate" size={20} color="white" />
+              <Text style={styles.directionsButtonText}>Chỉ đường</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.checkinTitle}>Lịch sử Check-in:</Text>
+          </View>
+
+          <ScrollView horizontal>
+            <View style={{ flexDirection: "row", gap: 12 }}>
+              <CheckinBlock />
+              <CheckinBlock />
+            </View>
+          </ScrollView>
         </View>
       )}
     </View>
@@ -230,7 +245,7 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   map: { flex: 1 },
   marker: {
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     paddingVertical: 4,
     paddingHorizontal: 8,
     borderRadius: 20,
@@ -242,7 +257,7 @@ const styles = StyleSheet.create({
     left: 20,
     right: 20,
     backgroundColor: "#fff",
-    borderRadius: 12,
+    borderRadius: 20,
     flexDirection: "column",
     padding: 12,
     shadowColor: "#000",
@@ -286,8 +301,9 @@ const styles = StyleSheet.create({
   checkinTime: { fontSize: 12, color: "gray", marginTop: 2 },
   checkinNote: { fontSize: 14, marginTop: 4 },
   closeButton: {
-    width: 24,
-    height: 24,
+    position: "absolute",
+    width: 40,
+    height: 40,
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
@@ -296,38 +312,24 @@ const styles = StyleSheet.create({
   },
   closeText: { fontSize: 16, fontWeight: "bold" },
   myLocationButton: {
-    position: 'absolute',
+    position: "absolute",
     top: 200,
     right: 20,
-    backgroundColor: 'white',
-    borderRadius: 30,
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   directionsButton: {
-    backgroundColor: '#4e8d54',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#00623a",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 10,
     paddingHorizontal: 15,
-    borderRadius: 8,
+    borderRadius: 20,
     marginTop: 10,
     marginBottom: 5,
   },
   directionsButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
     marginLeft: 8,
   },
 });

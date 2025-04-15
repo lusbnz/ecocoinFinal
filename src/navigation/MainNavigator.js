@@ -18,15 +18,16 @@ export default function MainNavigator() {
           let iconName;
           let iconSize = size;
 
-          if (route.name === "Home") iconName = "home-outline";
-          else if (route.name === "Promo") iconName = "gift-outline";
-          else if (route.name === "Map") iconName = "map-outline";
-          else if (route.name === "History") iconName = "time-outline";
-          else if (route.name === "Me") iconName = "person-outline";
+          if (route.name === "Home") iconName = "home";
+          else if (route.name === "Promo") iconName = "gift";
+          else if (route.name === "Map") iconName = "map";
+          else if (route.name === "History") iconName = "time";
+          else if (route.name === "Me") iconName = "person";
 
           return <Ionicons name={iconName} size={iconSize} color={color} />;
         },
-        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#00623c",
+        tabBarShowLabel: true,
         headerShown: false,
         tabBarStyle: styles.tabBar,
       })}
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   tabBar: {
     height: 80,
     position: "absolute",
-    backgroundColor: "#EDF1F0",
+    backgroundColor: "#ffffff",
     shadowColor: "#222524",
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.1,

@@ -22,8 +22,8 @@ export default function CreatePasswordScreen({ navigation }) {
   return (
     <View style={styles.backgroundContainer}>
       <View style={styles.formContainer}>
-        <Text style={styles.title}>Create Password</Text>
-        <Text style={styles.subtitle}>Please enter your new password</Text>
+        <Text style={styles.title}>Tạo mật khẩu</Text>
+        <Text style={styles.subtitle}>Vui lòng nhập mật khẩu mới</Text>
         <TextInput
           style={styles.input}
           placeholder="Mật khẩu"
@@ -52,7 +52,7 @@ export default function CreatePasswordScreen({ navigation }) {
           disabled={!isValid}
           onPress={() => navigation.navigate("SignIn")}
         >
-          <Text style={styles.buttonText}>Next</Text>
+          <Text style={styles.buttonText}>Tiếp theo</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -62,7 +62,7 @@ export default function CreatePasswordScreen({ navigation }) {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#248A3D",
+    color: "#00623A",
     textAlign: "left",
   },
   subtitle: {
@@ -111,14 +111,14 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     fontSize: 12,
     fontWeight: "bold",
-    color: "#248A3D",
+    color: "#00623A",
   },
   valid: {
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     color: "white",
   },
   button: {
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     padding: 15,
     borderRadius: 100,
     alignItems: "center",

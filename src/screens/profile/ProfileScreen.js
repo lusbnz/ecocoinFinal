@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import CheckinBlock from "../../component/CheckinBlock";
 
 const { width } = Dimensions.get("window");
 
@@ -68,20 +69,20 @@ export default function ProfileScreen({ navigation }) {
       </View>
       <View style={styles.pointsContainer}>
         <Text style={styles.pointsText}>873 Điểm tích lũy</Text>
-        <MaterialIcons name="monetization-on" size={24} color="#248A3D" />
+        <MaterialIcons name="monetization-on" size={24} color="#4dac85" />
       </View>
       <View
         style={{
           height: 150,
-          backgroundColor: "#248A3D",
+          backgroundColor: "#4dac85",
           margin: "20",
           marginBottom: "0",
           padding: "10",
           borderRadius: 20,
-          flex: '1',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '5'
+          flex: "1",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "5",
         }}
       >
         <Text
@@ -91,7 +92,7 @@ export default function ProfileScreen({ navigation }) {
             fontWeight: "600",
           }}
         >
-          A Special Gift For You!
+          Món quà đặc biệt cho bạn!
         </Text>
         <Text
           style={{
@@ -113,17 +114,12 @@ export default function ProfileScreen({ navigation }) {
         <Text style={styles.detailsContent}>Tuổi: 22</Text>
 
         <Text style={styles.sectionTitleCheckin}>Checkin:</Text>
-        <FlatList
-          ref={flatListRef}
-          data={checkinImages}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <Image source={{ uri: item.image }} style={styles.checkinImage} />
-          )}
-        />
+        <ScrollView horizontal>
+          <View style={{ flexDirection: "row", gap: 12 }}>
+            <CheckinBlock isProfile={true}/>
+            <CheckinBlock isProfile={true}/>
+          </View>
+        </ScrollView>
       </View>
 
       <View style={styles.menuContainer}>
@@ -185,7 +181,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 50,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#e5e5e5",
   },
   header: {
     width: "90%",
@@ -196,7 +192,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     alignItems: "start",
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#ffffff",
   },
   profileInfo: { flexDirection: "row", alignItems: "center" },
   avatar: { width: 60, height: 60, borderRadius: 30, marginRight: 10 },
@@ -210,7 +206,7 @@ const styles = StyleSheet.create({
     display: "flex",
     paddingHorizontal: 20,
     paddingVertical: 15,
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#ffffff",
     marginTop: 20,
     width: "90%",
     marginLeft: "auto",
@@ -219,11 +215,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  pointsText: { fontSize: 18, fontWeight: "bold", color: "#248A3D" },
+  pointsText: { fontSize: 18, fontWeight: "bold", color: "#00623A" },
   detailsContainer: {
     paddingHorizontal: 20,
     paddingVertical: 15,
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#ffffff",
     marginTop: 20,
     width: "90%",
     marginLeft: "auto",
@@ -238,15 +234,15 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "bold",
-    color: "#222524",
+    color: "#181818",
   },
-  detailsContent: { fontSize: 14, color: "#434448" },
+  detailsContent: { fontSize: 14, color: "#181818" },
   sectionTitleCheckin: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "bold",
-    color: "#222524",
+    color: "#181818",
     marginTop: 10,
   },
   checkinImage: {
@@ -256,7 +252,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   menuContainer: {
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#ffffff",
     marginTop: 20,
     width: "90%",
     marginLeft: "auto",
@@ -272,7 +268,7 @@ const styles = StyleSheet.create({
   logoutButton: {
     padding: 10,
     width: "40%",
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     borderRadius: 20,
     alignItems: "center",
     marginTop: 50,

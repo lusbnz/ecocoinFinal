@@ -1,4 +1,3 @@
-import { setStatusBarTranslucent } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   View,
@@ -15,14 +14,14 @@ const { height } = Dimensions.get("window");
 export default function SignupScreen({ navigation }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [agree, setAgree] = useState(setStatusBarTranslucent);
+  const [agree, setAgree] = useState(true);
 
   return (
     <View style={styles.backgroundContainer}>
       <View style={styles.formContainer}>
-        <Text style={styles.title}>Register</Text>
+        <Text style={styles.title}>Đăng ký</Text>
         <Text style={styles.subtitle}>
-          Please enter your details to register
+          Vui lòng nhập thông tin của bạn để đăng ký
         </Text>
         <TextInput
           style={styles.input}
@@ -43,12 +42,12 @@ export default function SignupScreen({ navigation }) {
             <Checkbox
               status={agree ? "checked" : "unchecked"}
               onPress={() => setAgree(!agree)}
-              color="#248A3D"
+              color="#00623A"
               uncheckedColor="#6D6D6D"
             />
           </View>
           <Text style={styles.checkboxText}>
-            I agree to the <Text style={styles.link}>Terms and Conditions</Text>
+           Tôi đồng ý với <Text style={styles.link}>Quyền và Điều khoản</Text>
           </Text>
         </View>
 
@@ -57,10 +56,10 @@ export default function SignupScreen({ navigation }) {
           disabled={!agree}
           onPress={() => navigation.navigate("CreatePassword")}
         >
-          <Text style={styles.buttonText}>Register</Text>
+          <Text style={styles.buttonText}>Đăng ký</Text>
         </TouchableOpacity>
 
-        <Text style={styles.orText}>or register with</Text>
+        <Text style={styles.orText}>hoặc đăng ký với</Text>
         <View style={styles.socialButtons}>
           <View style={styles.socialButton} />
           <View style={styles.socialButton} />
@@ -69,7 +68,7 @@ export default function SignupScreen({ navigation }) {
 
         <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
           <Text style={styles.loginText}>
-            Already have an account? <Text style={styles.link}>Login</Text>
+            Bạn đã có tài khoản? <Text style={styles.link}>Đăng nhập</Text>
           </Text>
         </TouchableOpacity>
       </View>
@@ -80,7 +79,7 @@ export default function SignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#248A3D",
+    color: "#00623A",
     textAlign: "left",
   },
   subtitle: {
@@ -127,11 +126,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   link: {
-    color: "#248A3D",
+    color: "#00623A",
     fontWeight: "bold",
   },
   button: {
-    backgroundColor: "#248A3D",
+    backgroundColor: "#00623A",
     padding: 15,
     borderRadius: 100,
     alignItems: "center",
