@@ -151,7 +151,7 @@ export default function PromoScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#F0F2F5",
     paddingHorizontal: 16,
     paddingTop: 40,
     paddingBottom: 60,

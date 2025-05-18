@@ -43,6 +43,7 @@ const farmCardStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e5e5e5',
     width: 300,
+    marginBottom: 120
   },
   imageWrapper: {
     position: "relative",

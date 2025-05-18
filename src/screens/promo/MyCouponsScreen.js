@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
   FlatList,
   TouchableOpacity,
-  ScrollView,
+  StyleSheet,
+  SafeAreaView,
+  Animated,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import VoucherBlock from "../../component/VoucherBlock";
@@ -88,145 +90,220 @@ const promoData = [
 
 const MyCouponsScreen = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(50)).current;
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, []);
 
   const filteredData =
     selectedCategory === "All"
       ? promoData
       : promoData.filter((item) => item.category === selectedCategory);
 
-  return (
-    <View
-      style={{
-        padding: 15,
-        paddingTop: 50,
-        display: "flex",
-        flexDirection: "column",
-        marginBottom: 100,
-      }}
+  // Group data by time for section headers
+  const groupedData = [
+    {
+      title: "Gần đây",
+      data: filteredData.filter((item) => item.time === "Just Now"),
+    },
+    {
+      title: "Trước đó",
+      data: filteredData.filter((item) => item.time !== "Just Now"),
+    },
+  ].filter((section) => section.data.length > 0);
+
+  const renderCategory = ({ item }) => (
+    <TouchableOpacity
+      style={[
+        styles.categoryButton,
+        selectedCategory === item && styles.categoryButtonSelected,
+      ]}
+      onPress={() => setSelectedCategory(item)}
+      activeOpacity={0.7}
     >
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 10,
-        }}
+      <Text
+        style={[
+          styles.categoryText,
+          selectedCategory === item && styles.categoryTextSelected,
+        ]}
       >
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            backgroundColor: "#ffffff",
-            borderRadius: 100,
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 12,
-            width: 40,
-            height: 40,
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.1,
-            shadowRadius: 1,
-            elevation: 3,
-          }}
-        >
-          <Ionicons name="chevron-back" size={16} color="#00623A" />
-        </TouchableOpacity>
+        {item}
+      </Text>
+    </TouchableOpacity>
+  );
 
-        <Text
-          style={{
-            marginLeft: -32,
-            fontWeight: "bold",
-            fontSize: "16",
-            fontFamily: "Inter",
-          }}
-        >
-          Mã của tôi
-        </Text>
-        <View></View>
-      </View>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={{
-          marginTop: 10,
-          marginBottom: 10,
-          paddingBottom: 10,
-          height: 60,
-        }}
+  const renderItem = ({ item }) => (
+    <VoucherBlock
+      navigation={navigation}
+      uri={item.uri}
+      id={item.id}
+      title={item.title}
+      desc={item.desc}
+      pricing={item.pricing}
+    />
+  );
+
+  const renderSectionHeader = ({ section: { title } }) => (
+    <Text style={styles.sectionTitle}>{title}</Text>
+  );
+
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <Animated.View
+        style={[styles.container, { opacity: fadeAnim, transform: [{ translateY: slideAnim }] }]}
       >
-        {categories.map((category, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => setSelectedCategory(category)}
-            style={{
-              backgroundColor:
-                selectedCategory === category ? "#00623a" : "#ffffff",
-              paddingHorizontal: 15,
-              borderRadius: 20,
-              marginRight: 10,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: 40,
-              minWidth: 100,
-            }}
-          >
-            <Text
-              style={{
-                color: selectedCategory === category ? "#fff" : "#000",
-                fontWeight: "bold",
-              }}
-            >
-              {category}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-
-      <FlatList
-        data={filteredData}
-        keyExtractor={(item) => item.id}
-        style={{ marginTop: 0 }}
-        renderItem={({ item, index }) => (
-          <>
-            {index === 0 && (
-              <Text
-                style={{
-                  marginBottom: "10",
-                  fontSize: "18",
-                  fontWeight: "600",
-                }}
-              >
-                Gần đây
-              </Text>
-            )}
-
-            <VoucherBlock
-              navigation={navigation}
-              uri={item.uri}
-              id={item.id}
-              title={item.title}
-              desc={item.desc}
-              pricing={item.pricing}
+        <FlatList
+          ListHeaderComponent={
+            <>
+              <View style={styles.header}>
+                <TouchableOpacity
+                  style={styles.backButton}
+                  onPress={() => navigation.goBack()}
+                  activeOpacity={0.7}
+                >
+                  <Ionicons name="chevron-back" size={20} color="#00623A" />
+                </TouchableOpacity>
+                <Text style={styles.headerTitle}>My Coupons</Text>
+                <View style={styles.headerPlaceholder} />
+              </View>
+              <FlatList
+                data={categories}
+                renderItem={renderCategory}
+                keyExtractor={(item) => item}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.categoryContainer}
+              />
+            </>
+          }
+          data={groupedData}
+          renderItem={({ item }) => (
+            <FlatList
+              data={item.data}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.id}
+              contentContainerStyle={styles.voucherList}
             />
-
-            {index === 4 && (
-              <Text
-                style={{
-                  marginBottom: "10",
-                  fontSize: "18",
-                  fontWeight: "600",
-                }}
-              >
-                Trước đó
-              </Text>
-            )}
-          </>
-        )}
-      />
-    </View>
+          )}
+          keyExtractor={(item) => item.title}
+          SectionList
+          sections={groupedData}
+          renderSectionHeader={renderSectionHeader}
+          contentContainerStyle={styles.flatListContent}
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>Không có thông báo</Text>
+          }
+        />
+      </Animated.View>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#F0F2F5",
+  },
+  container: {
+    flex: 1,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 12,
+    marginHorizontal: 16,
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  backButton: {
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    width: 40,
+    height: 40,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#222524",
+  },
+  headerPlaceholder: {
+    width: 40,
+    height: 40,
+  },
+  categoryContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    gap: 12,
+  },
+  categoryButton: {
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  categoryButtonSelected: {
+    backgroundColor: "#00623A",
+  },
+  categoryText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#222524",
+  },
+  categoryTextSelected: {
+    color: "#FFFFFF",
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#222524",
+    marginBottom: 12,
+    marginHorizontal: 16,
+  },
+  voucherList: {
+    gap: 12,
+    paddingHorizontal: 16,
+  },
+  flatListContent: {
+    paddingBottom: 16,
+  },
+  emptyText: {
+    fontSize: 14,
+    color: "#888",
+    textAlign: "center",
+    marginTop: 16,
+  },
+});
 
 export default MyCouponsScreen;
