@@ -11,6 +11,7 @@ import {
   Animated,
   ScrollView,
   SafeAreaView,
+  Image, // Already imported
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
@@ -72,109 +73,115 @@ export default function CreatePasswordScreen({ navigation }) {
   };
 
   return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
-      >
-        <View style={styles.backgroundContainer}>
-          <ScrollView
-            contentContainerStyle={styles.scrollContent}
-            keyboardShouldPersistTaps="handled"
-            bounces={false}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
+    >
+      <View style={styles.backgroundContainer}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          bounces={false}
+        >
+          <Animated.View
+            style={[
+              styles.formContainer,
+              { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
+            ]}
           >
-            <Animated.View
-              style={[
-                styles.formContainer,
-                { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
-              ]}
-            >
-              <Text style={styles.title}>Tạo mật khẩu</Text>
-              <Text style={styles.subtitle}>Vui lòng nhập mật khẩu mới</Text>
+            <Image
+              source={require("../../../assets/logo_2.png")} // Adjust path as needed
+              style={styles.logo}
+              resizeMode="contain"
+              accessibilityLabel="Ecocoin logo"
+            />
+            <Text style={styles.title}>Tạo mật khẩu</Text>
+            <Text style={styles.subtitle}>Vui lòng nhập mật khẩu mới</Text>
 
-              <View style={styles.inputContainer}>
-                <Feather
-                  name="lock"
-                  size={20}
-                  color="#00623A"
-                  style={styles.icon}
-                />
-                <TextInput
-                  style={[styles.input, passwordError ? styles.inputError : null]}
-                  placeholder="Mật khẩu"
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry={!showPassword}
-                  placeholderTextColor="#A0A0A0"
-                />
-                <TouchableOpacity
-                  style={styles.eyeIcon}
-                  onPress={() => setShowPassword(!showPassword)}
-                >
-                  <Feather
-                    name={showPassword ? "eye" : "eye-off"}
-                    size={20}
-                    color="#00623A"
-                  />
-                </TouchableOpacity>
-              </View>
-              {passwordError ? (
-                <Text style={styles.errorText}>{passwordError}</Text>
-              ) : null}
-
-              <View style={styles.inputContainer}>
-                <Feather
-                  name="lock"
-                  size={20}
-                  color="#00623A"
-                  style={styles.icon}
-                />
-                <TextInput
-                  style={[styles.input, rePasswordError ? styles.inputError : null]}
-                  placeholder="Nhập lại mật khẩu"
-                  value={rePassword}
-                  onChangeText={setRePassword}
-                  secureTextEntry={!showRePassword}
-                  placeholderTextColor="#A0A0A0"
-                />
-                <TouchableOpacity
-                  style={styles.eyeIcon}
-                  onPress={() => setShowRePassword(!showRePassword)}
-                >
-                  <Feather
-                    name={showRePassword ? "eye" : "eye-off"}
-                    size={20}
-                    color="#00623A"
-                  />
-                </TouchableOpacity>
-              </View>
-              {rePasswordError ? (
-                <Text style={styles.errorText}>{rePasswordError}</Text>
-              ) : null}
-
-              <View style={styles.criteriaContainer}>
-                <Text style={[styles.badge, isLengthValid && styles.valid]}>
-                  8+ Ký tự
-                </Text>
-                <Text style={[styles.badge, hasNumber && styles.valid]}>
-                  Chứa số
-                </Text>
-                <Text style={[styles.badge, hasNonLetter && styles.valid]}>
-                  Ký tự đặc biệt
-                </Text>
-              </View>
-
+            <View style={styles.inputContainer}>
+              <Feather
+                name="lock"
+                size={20}
+                color="#00623A"
+                style={styles.icon}
+              />
+              <TextInput
+                style={[styles.input, passwordError ? styles.inputError : null]}
+                placeholder="Mật khẩu"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+                placeholderTextColor="#A0A0A0"
+              />
               <TouchableOpacity
-                style={[styles.button, { opacity: isValid ? 1 : 0.5 }]}
-                disabled={!isValid}
-                onPress={handleContinue}
+                style={styles.eyeIcon}
+                onPress={() => setShowPassword(!showPassword)}
               >
-                <Text style={styles.buttonText}>Tiếp theo</Text>
+                <Feather
+                  name={showPassword ? "eye" : "eye-off"}
+                  size={20}
+                  color="#00623A"
+                />
               </TouchableOpacity>
-            </Animated.View>
-          </ScrollView>
-        </View>
-      </KeyboardAvoidingView>
+            </View>
+            {passwordError ? (
+              <Text style={styles.errorText}>{passwordError}</Text>
+            ) : null}
+
+            <View style={styles.inputContainer}>
+              <Feather
+                name="lock"
+                size={20}
+                color="#00623A"
+                style={styles.icon}
+              />
+              <TextInput
+                style={[styles.input, rePasswordError ? styles.inputError : null]}
+                placeholder="Nhập lại mật khẩu"
+                value={rePassword}
+                onChangeText={setRePassword}
+                secureTextEntry={!showRePassword}
+                placeholderTextColor="#A0A0A0"
+              />
+              <TouchableOpacity
+                style={styles.eyeIcon}
+                onPress={() => setShowRePassword(!showRePassword)}
+              >
+                <Feather
+                  name={showRePassword ? "eye" : "eye-off"}
+                  size={20}
+                  color="#00623A"
+                />
+              </TouchableOpacity>
+            </View>
+            {rePasswordError ? (
+              <Text style={styles.errorText}>{rePasswordError}</Text>
+            ) : null}
+
+            <View style={styles.criteriaContainer}>
+              <Text style={[styles.badge, isLengthValid && styles.valid]}>
+                8+ Ký tự
+              </Text>
+              <Text style={[styles.badge, hasNumber && styles.valid]}>
+                Chứa số
+              </Text>
+              <Text style={[styles.badge, hasNonLetter && styles.valid]}>
+                Ký tự đặc biệt
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              style={[styles.button, { opacity: isValid ? 1 : 0.5 }]}
+              disabled={!isValid}
+              onPress={handleContinue}
+            >
+              <Text style={styles.buttonText}>Tiếp theo</Text>
+            </TouchableOpacity>
+          </Animated.View>
+        </ScrollView>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -194,16 +201,24 @@ const styles = StyleSheet.create({
   formContainer: {
     width: "100%",
     backgroundColor: "white",
-    minHeight: height * 0.75, 
+    minHeight: height * 0.8,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
-    paddingVertical: 32,
+    // paddingVertical: 32,
+    paddingBottom:32,
+    paddingTop:16,
     paddingHorizontal: 24,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 12,
     elevation: 12,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    alignSelf: "center",
+    marginBottom: 16, // Add spacing below the logo
   },
   title: {
     fontSize: 28,

@@ -10,9 +10,10 @@ import {
   Platform,
   Animated,
   ScrollView,
+  Image, // Add Image import
 } from "react-native";
 import { Checkbox } from "react-native-paper";
-import { Feather } from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const { height } = Dimensions.get("window");
 
@@ -86,6 +87,12 @@ export default function SignupScreen({ navigation }) {
               { opacity: fadeAnim, transform: [{ translateY: slideAnim }] },
             ]}
           >
+            <Image
+              source={require("../../../assets/logo_2.png")} // Adjust path as needed
+              style={styles.logo}
+              resizeMode="contain"
+              accessibilityLabel="Ecocoin logo"
+            />
             <Text style={styles.title}>Đăng ký</Text>
             <Text style={styles.subtitle}>
               Vui lòng nhập thông tin để tiếp tục
@@ -130,7 +137,7 @@ export default function SignupScreen({ navigation }) {
               <Text style={styles.errorText}>{phoneError}</Text>
             ) : null}
 
-            <View style={styles.checkboxContainer}>
+            {/* <View style={styles.checkboxContainer}>
               <Checkbox
                 status={agree ? "checked" : "unchecked"}
                 onPress={() => setAgree(!agree)}
@@ -141,7 +148,7 @@ export default function SignupScreen({ navigation }) {
                 Tôi đồng ý với{" "}
                 <Text style={styles.link}>Quyền và Điều khoản</Text>
               </Text>
-            </View>
+            </View> */}
 
             <TouchableOpacity
               style={[styles.button, { opacity: agree ? 1 : 0.5 }]}
@@ -153,9 +160,17 @@ export default function SignupScreen({ navigation }) {
 
             <Text style={styles.orText}>hoặc đăng ký với</Text>
             <View style={styles.socialButtons}>
-              {["facebook", "google", "apple"].map((type) => (
+              {[
+                { type: "facebook", icon: "facebook" },
+                { type: "google", icon: "google" },
+                { type: "apple", icon: "apple" },
+              ].map(({ type, icon }) => (
                 <TouchableOpacity key={type} style={styles.socialButton}>
-                  <Feather name={type} size={24} color="#00623A" />
+                  <MaterialCommunityIcons
+                    name={icon}
+                    size={24}
+                    color="#00623A"
+                  />
                 </TouchableOpacity>
               ))}
             </View>
@@ -188,16 +203,24 @@ const styles = StyleSheet.create({
   formContainer: {
     backgroundColor: "white",
     width: "100%",
-    minHeight: height * 0.75, 
+    minHeight: height * 0.8,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
-    paddingVertical: 32,
+    // paddingVertical: 32,
+    paddingTop:16,
+    paddingBottom:32,
     paddingHorizontal: 24,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 12,
     elevation: 12,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    alignSelf: "center",
+    marginBottom: 16, // Add spacing below the logo
   },
   title: {
     fontSize: 28,
